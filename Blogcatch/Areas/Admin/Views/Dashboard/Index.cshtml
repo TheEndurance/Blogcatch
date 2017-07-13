@@ -1,8 +1,54 @@
-﻿@model dynamic
+﻿@model IEnumerable<Blogcatch.ViewModel.PageViewModel>
 
 @{
     ViewBag.Title = "Admin Area";
 }
 
 <h2>Admin Area</h2>
+@if (!Model.Any())
+{
+    <p>There are currently no pages.</p>
+}
+else
+{
+    <table class="table-responsive">
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Slug
+            </th>
+            <th>
+                Sidebar
+            </th>
+            <th>
+                Modify
+            </th>
+        </tr>
+        
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m=>item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m=>item.Slug)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m=>item.HasSidebar)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit","EditPage")
+                        @Html.ActionLink("Details", "DetailsPage")
+                        @Html.ActionLink("Delete", "DeletePage")
+                    </td>
+                </tr>
+            }
+      
+        
+
+    </table>
+}
 
