@@ -1,5 +1,9 @@
-﻿using Blogcatch.Areas.Admin.Models;
+﻿using Blogcatch.Areas.Admin.Controllers;
+using Blogcatch.Areas.Admin.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
+using System.Web.Mvc;
 
 namespace Blogcatch.ViewModel
 {
@@ -18,6 +22,23 @@ namespace Blogcatch.ViewModel
         public int Sorting { get; set; }
 
         public bool HasSidebar { get; set; }
+
+        public string Heading
+        {
+            get { return (Id == 0) ? "Add a new page" : "Edit page"; }
+        }
+
+        public string Action
+        {
+            get
+            {
+                Expression<Func<PagesController, ActionResult>> AddPage = (pg => pg.AddPage(null));
+                Expression<Func<PagesController, ActionResult>> EditPage = (pg => pg.EditPage(0));
+            }
+
+        }
+
+
         public PageViewModel(Page page)
         {
             this.Title = page.Title;

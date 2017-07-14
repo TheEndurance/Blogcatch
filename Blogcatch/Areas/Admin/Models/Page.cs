@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Blogcatch.ViewModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Blogcatch.Areas.Admin.Models
 {
@@ -19,5 +20,23 @@ namespace Blogcatch.Areas.Admin.Models
         public int Sorting { get; set; }
 
         public bool HasSidebar { get; set; }
+
+
+        public static Page CreatePage(PageViewModel pageVM)
+        {
+            var page = new Page();
+
+            page.Title = pageVM.Title;
+
+            var slug = (string.IsNullOrWhiteSpace(pageVM.Slug))
+                ? pageVM.Title.Replace(" ", "-").ToLower()
+                : pageVM.Slug.Replace(" ", "-").ToLower();
+
+            page.Slug = slug;
+            page.Body = pageVM.Body;
+            page.HasSidebar = pageVM.HasSidebar;
+            page.Sorting = 100;
+            return page;
+        }
     }
 }
