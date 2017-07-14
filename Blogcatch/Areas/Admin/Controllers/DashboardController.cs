@@ -22,13 +22,8 @@ namespace Blogcatch.Areas.Admin.Controllers
         // GET: Admin/Dashboard
         public ActionResult Index()
         {
-            var pages = _context.Pages
-                .ToArray()
-                .OrderBy(p => p.Sorting)
-                .Select(p => new PageViewModel(p))
-                .ToList();
-  
-            return View(pages);
+      
+            return View();
         }
     }
 }

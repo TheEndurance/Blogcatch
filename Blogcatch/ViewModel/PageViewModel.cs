@@ -5,14 +5,8 @@ namespace Blogcatch.ViewModel
 {
     public class PageViewModel
     {
-        public PageViewModel(Page page)
-        {
-            this.Title = page.Title;
-            this.Slug = page.Slug;
-            this.Body = page.Body;
-            this.Sorting = page.Sorting;
-            this.HasSidebar = page.HasSidebar;
-        }
+        public int Id { get; set; }
+
         [StringLength(50)]
         public string Title { get; set; }
 
@@ -24,5 +18,18 @@ namespace Blogcatch.ViewModel
         public int Sorting { get; set; }
 
         public bool HasSidebar { get; set; }
+        public PageViewModel(Page page)
+        {
+            this.Title = page.Title;
+            this.Slug = page.Slug;
+            this.Body = page.Body;
+            this.Sorting = page.Sorting;
+            this.HasSidebar = page.HasSidebar;
+        }
+
+        public PageViewModel()
+        {
+        }
+
     }
 }
