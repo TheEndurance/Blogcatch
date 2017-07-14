@@ -18,7 +18,7 @@ namespace Blogcatch.Areas.Admin.Controllers
         {
             _context.Dispose();
         }
-        // GET: Admin/Page
+        // GET: Admin/Pages
         public ActionResult Index()
         {
             var pages = _context.Pages
@@ -29,7 +29,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             return View(pages);
         }
 
-        // GET : Admin/Page/AddPage
+        // GET : Admin/Pages/AddPage
         [HttpGet]
         public ActionResult AddPage()
         {
@@ -37,7 +37,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             return View("PageForm");
         }
 
-        // POST : Admin/Page/AddPage
+        // POST : Admin/Pages/AddPage
         [HttpPost]
         public ActionResult Create(PageViewModel pageVM)
         {
@@ -62,7 +62,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             return View("PageForm", pageVM);
         }
 
-        // GET: Admin/Page/EditPage/Id
+        // GET: Admin/Pages/EditPage/Id
         [HttpGet]
         public ActionResult EditPage(int id)
         {
@@ -75,15 +75,34 @@ namespace Blogcatch.Areas.Admin.Controllers
             return View("PageForm", pageVM);
         }
 
+        // POST: Admin/Pages/EditPage
         [HttpPost]
-        public ActionResult EditPage(PageViewModel PageVM)
+        public ActionResult EditPage(PageViewModel pageVM)
         {
             if (!ModelState.IsValid)
             {
-                return View("PageForm", PageVM);
+                return View("PageForm", pageVM);
             }
 
-            return View();
+            var page = _context.Pages.SingleOrDefault(p => p.Id == pageVM.Id);
+            if (page == null)
+            {
+                return Content("Page not found");
+            }
+
+            Page.EditPage(pageVM, page);
+
+            if (_context.Pages.Where(p => p.Id != pageVM.Id).Any(p => p.Title == pageVM.Title || p.Slug == pageVM.Slug))
+            {
+                ModelState.AddModelError("", "Title or slug already exists");
+                return View("PageForm", pageVM);
+            }
+
+            _context.SaveChanges();
+
+            return View("PageForm", pageVM);
         }
+
+
     }
 }
