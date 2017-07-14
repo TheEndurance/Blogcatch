@@ -34,6 +34,8 @@ namespace Blogcatch.ViewModel
             {
                 Expression<Func<PagesController, ActionResult>> AddPage = (pg => pg.AddPage(null));
                 Expression<Func<PagesController, ActionResult>> EditPage = (pg => pg.EditPage(0));
+                var action = (Id == 0) ? AddPage : EditPage;
+                return (action.Body as MethodCallExpression).Method.Name;
             }
 
         }
@@ -41,6 +43,7 @@ namespace Blogcatch.ViewModel
 
         public PageViewModel(Page page)
         {
+            this.Id = page.Id;
             this.Title = page.Title;
             this.Slug = page.Slug;
             this.Body = page.Body;

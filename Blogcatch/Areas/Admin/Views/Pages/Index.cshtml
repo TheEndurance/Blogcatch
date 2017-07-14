@@ -41,9 +41,9 @@ else
                     @Html.DisplayFor(m=>item.HasSidebar)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit","EditPage")
-                    @Html.ActionLink("Details", "DetailsPage")
-                    @Html.ActionLink("Delete", "DeletePage")
+                    @Html.ActionLink("Edit","EditPage",new {id =item.Id})
+                    @Html.ActionLink("Details", "DetailsPage",new {id=item.Id})
+                    @Html.ActionLink("Delete", "DeletePage",new {id=item.Id})
                 </td>
             </tr>
         }

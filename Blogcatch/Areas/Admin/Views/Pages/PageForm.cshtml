@@ -10,10 +10,13 @@
 @using (Html.BeginForm(Model.Action,"Pages")) 
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>PageViewModel</h4>
         <hr />
+        @if (TempData["SM"] != null)
+        {
+            TempData["SM"]
+        }
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,7 +53,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="@Model.Heading" class="btn btn-default" />
             </div>
         </div>
     </div>

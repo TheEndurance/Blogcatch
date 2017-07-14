@@ -33,13 +33,13 @@ namespace Blogcatch.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult AddPage()
         {
-
-            return View("PageForm");
+            var pageVM = new PageViewModel();
+            return View("PageForm", pageVM);
         }
 
         // POST : Admin/Pages/AddPage
         [HttpPost]
-        public ActionResult Create(PageViewModel pageVM)
+        public ActionResult AddPage(PageViewModel pageVM)
         {
             if (!ModelState.IsValid)
             {
@@ -99,6 +99,8 @@ namespace Blogcatch.Areas.Admin.Controllers
             }
 
             _context.SaveChanges();
+
+            TempData["SM"] = "Page was successfully edited!";
 
             return View("PageForm", pageVM);
         }
