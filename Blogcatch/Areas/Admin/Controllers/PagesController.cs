@@ -18,6 +18,7 @@ namespace Blogcatch.Areas.Admin.Controllers
         {
             _context.Dispose();
         }
+        [HttpGet]
         // GET: Admin/Pages
         public ActionResult Index()
         {
@@ -118,5 +119,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             var pageVM = new PageViewModel(page);
             return View(pageVM);
         }
+
+
     }
 }

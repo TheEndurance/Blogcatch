@@ -5,15 +5,16 @@
 }
 
 <h2>Pages</h2>
-@Html.ActionLink("Add a page","AddPage")
+@Html.ActionLink("Add a page", "AddPage")
 @if (!Model.Any())
 {
     <p>There are currently no pages.</p>
 }
 else
 {
-    <table class="table table-responsive">
-        <tr>
+    <table id="pages" class="table table-responsive sorting">
+        <thead>
+        <tr class="home">
             <th>
                 Title
             </th>
@@ -27,28 +28,73 @@ else
                 Modify
             </th>
         </tr>
-        
+        </thead>
+        <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m=>item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(m=>item.Slug)
-                </td>
-                <td>
-                    @Html.DisplayFor(m=>item.HasSidebar)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit","EditPage",new {id =item.Id})
-                    @Html.ActionLink("Details", "PageDetails",new {id=item.Id})
-                    @Html.ActionLink("Delete", "DeletePage",new {id=item.Id})
-                </td>
-            </tr>
+           
+                <tr id="@item.Id" class="@item.Slug">
+                    <td>
+                        @Html.DisplayFor(m => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Slug)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.HasSidebar)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditPage", new { id = item.Id })
+                        @Html.ActionLink("Details", "PageDetails", new { id = item.Id })
+                        <a class="btn-link js-delete" data-page-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+           
         }
-      
-        
+        </tbody>
+
     </table>
 }
+@section Scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
 
+            /*
+            * Reorder Pages
+            */
+            $("table#pages tbody").sortable({
+                items: "tr:not(.home)",
+                placeholder: "ui-state-highlight",
+                update: function() {
+                    var ids = JSON.stringify($("table#pages tbody").sortable("toArray"));
+                    console.log(ids);
+
+                    $.ajax({
+                        method: "POST",
+                        url: "/api/Pages/ReorderPages",
+                        data: ids,
+                        contentType:"application/json"
+                    });
+                }
+            });
+
+            ////////////////////////////////////////////////
+
+            /*
+            * Delete Page
+            */
+            $("a.js-delete").click(function () {
+                var id = $(this).attr("data-page-id");
+                if(confirm("Are you sure you want to delete this page?")) {
+                    $.ajax({
+                        method: "DELETE",
+                        url: "/api/Pages/DeletePage/?id="+id
+                    }).done(function() {
+                        $("tr#" + id).fadeOut();
+                    });
+                }
+            })
+        });
+    </script>
+}
