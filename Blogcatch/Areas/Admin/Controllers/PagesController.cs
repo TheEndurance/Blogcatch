@@ -106,5 +106,17 @@ namespace Blogcatch.Areas.Admin.Controllers
         }
 
 
+        // GET : Admin/Pages/PageDetails/Id
+        [HttpGet]
+        public ActionResult PageDetails(int id)
+        {
+            var page = _context.Pages.SingleOrDefault(p => p.Id == id);
+            if (page == null)
+            {
+                return Content("That page does not exist");
+            }
+            var pageVM = new PageViewModel(page);
+            return View(pageVM);
+        }
     }
 }
