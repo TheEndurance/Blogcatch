@@ -106,7 +106,6 @@ namespace Blogcatch.Areas.Admin.Controllers
             return View("PageForm", pageVM);
         }
 
-
         // GET : Admin/Pages/PageDetails/Id
         [HttpGet]
         public ActionResult PageDetails(int id)
@@ -118,6 +117,26 @@ namespace Blogcatch.Areas.Admin.Controllers
             }
             var pageVM = new PageViewModel(page);
             return View(pageVM);
+        }
+
+        // GET : Admin/Pages/EditSidebar
+        [HttpGet]
+        public ActionResult EditSidebar()
+        {
+            var sidebar = _context.Sidebar.Find(1);
+            var sidebarVM = new SidebarViewModel(sidebar);
+            return View(sidebarVM);
+        }
+
+        // POST : Admin/Pages/EditSidebar
+        [HttpPost]
+        public ActionResult EditSidebar(SidebarViewModel sidebarVM)
+        {
+            var sidebar = _context.Sidebar.Find(1);
+            sidebar.Body = sidebarVM.Body;
+            _context.SaveChanges();
+            TempData["SM"] = "Sidebar successfully edited!";
+            return View(sidebarVM);
         }
 
 

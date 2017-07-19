@@ -7,6 +7,7 @@ namespace Blogcatch.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Page> Pages { get; set; }
+        public DbSet<Sidebar> Sidebar { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

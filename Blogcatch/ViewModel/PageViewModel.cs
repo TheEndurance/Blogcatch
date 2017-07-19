@@ -21,6 +21,7 @@ namespace Blogcatch.ViewModel
         public string Body { get; set; }
         public int Sorting { get; set; }
 
+        [Display(Name = "Sidebar")]
         public bool HasSidebar { get; set; }
 
         public string Heading
