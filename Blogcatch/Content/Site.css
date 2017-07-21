@@ -15,3 +15,11 @@
 .dl-horizontal dt {
     white-space: normal;
 }
+
+table.sorting tr:not(.home) {
+    cursor:pointer;
+}
+
+.ui-state-highlight {
+    border:2px dashed #CCC;
+}
