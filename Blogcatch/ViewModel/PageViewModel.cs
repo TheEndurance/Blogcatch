@@ -18,6 +18,7 @@ namespace Blogcatch.ViewModel
         public string Slug { get; set; }
 
         [MinLength(3)]
+        [AllowHtml]
         public string Body { get; set; }
         public int Sorting { get; set; }
 

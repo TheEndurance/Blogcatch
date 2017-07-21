@@ -1,4 +1,5 @@
 ﻿using Blogcatch.Areas.Admin.Models;
+using System.Web.Mvc;
 
 namespace Blogcatch.ViewModel
 {
@@ -15,6 +16,7 @@ namespace Blogcatch.ViewModel
         }
         public int Id { get; set; }
 
+        [AllowHtml]
         public string Body { get; set; }
     }
 }
