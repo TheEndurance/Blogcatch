@@ -1,5 +1,5 @@
-﻿using Blogcatch.ViewModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Blogcatch.ViewModel;
 
 namespace Blogcatch.Areas.Admin.Models
 {
