@@ -68,7 +68,6 @@ else
                 placeholder: "ui-state-highlight",
                 update: function() {
                     var ids = JSON.stringify($("table#pages tbody").sortable("toArray"));
-                    console.log(ids);
 
                     $.ajax({
                         method: "POST",

@@ -12,5 +12,14 @@ namespace Blogcatch.AutoMapper
             var mapper = config.CreateMapper();
             return mapper;
         }
+
+        public static IMapper GetBlogMapper()
+        {
+            var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<CategoryDto, Category>()
+            );
+            var mapper = config.CreateMapper();
+            return mapper;
+        }
     }
 }

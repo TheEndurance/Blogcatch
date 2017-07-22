@@ -214,11 +214,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\api\BlogController.cs" />
     <Compile Include="Areas\Admin\Controllers\api\PagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PagesController.cs" />
     <Compile Include="Areas\Admin\Models\Category.cs" />
+    <Compile Include="Areas\Admin\Models\dto\CategoryDto.cs" />
     <Compile Include="Areas\Admin\Models\dto\PageDto.cs" />
     <Compile Include="Areas\Admin\Models\Page.cs" />
     <Compile Include="Areas\Admin\Models\Sidebar.cs" />

@@ -6,7 +6,7 @@
 
 <h2>Categories</h2>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <p>
             <input type="text" class="form-control" id="categoryTextInput" /><br />
             <a href="#" class="btn btn-primary" id="categoryNewButton">Create a new category</a>
@@ -29,7 +29,7 @@
         @foreach (var item in Model)
         {
             <tr id="@item.Id" class="@item.Slug">
-                <td>
+                <td class="category-name">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
@@ -87,10 +87,15 @@
 
                 var url = "/api/Blog/AddCategory";
 
-                $.post(url,
-                    { categoryName: categoryName },
-                    function (data) {
-                        var response = data.trim();
+
+                $.ajax({
+                    method: "POST",
+                    data: JSON.stringify({ Name: categoryName }),
+                    url: url,
+                    contentType: 'application/json',
+                    success: function (dataResponse) {
+                        var response = dataResponse.toString().trim();
+                        console.log(dataResponse);
                         if (response == "titleTaken") { //if the title is taken
                             UpdateCategoryMessage("That title is already taken!", "danger");
                         } else { //title is not taken
@@ -101,14 +106,15 @@
                                 UpdateCategoryMessage("Category successfully added!", "success");
                                 categoryTextInput.val("");
                                 var appendTo = $("table#categories tbody tr:last").clone();
-                                appendTo.attr("id", data);
-                                appendTo.Find("#item_name").val(categoryName);
-                                appendTo.Find("a.js-delete").attr("data-category-id",data);
+                                appendTo.attr("id", dataResponse);
+                                appendTo.find("td.category-name").html(categoryName);
+                                appendTo.find("a.js-delete").attr("data-category-id", dataResponse);
                                 table.append(appendTo);
                                 table.sortable("refresh");
                             }
                         }
-                    });
+                    }
+                });
             });
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
