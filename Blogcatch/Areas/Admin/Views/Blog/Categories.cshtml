@@ -10,7 +10,7 @@
         <p>
             <input type="text" class="form-control" id="categoryTextInput" /><br />
             <a href="#" class="btn btn-primary" id="categoryNewButton">Create a new category</a>
-            <span class="ajax-text hidden">
+            <span class="ajax-text">
                 <img id="ajaxImage" src="~/Content/images/ajax-loader.gif" />
             </span>
         </p>
@@ -56,13 +56,11 @@
             var table = $("table#categories tbody");
 
             function UpdateCategoryMessage(ajaxMessage, ajaxClass) {
-                ajaxText.removeClass("hidden");
                 ajaxText.html("<span class='alert alert-" + ajaxClass + "'>" + ajaxMessage + "</span>");
                 setTimeout(function () {
                     ajaxText.fadeOut("fast",
                         function () {
-                            ajaxText.html(ajaxImage.html());
-                            ajaxText.addClass("hidden");
+                            ajaxText.html(ajaxImage);
                         });
                 },
                     2000);
@@ -86,7 +84,7 @@
                 }
 
                 var url = "/api/Blog/AddCategory";
-
+                ajaxText.fadeIn("fast");
 
                 $.ajax({
                     method: "POST",

@@ -46,7 +46,7 @@ namespace Blogcatch.Areas.Admin.Controllers.api
 
             _context.Categories.Add(category);
             _context.SaveChanges();
-            return Json(category.Id);
+            return Ok(category.Id);
         }
 
         // POST : /api/blog/ReorderCategories
