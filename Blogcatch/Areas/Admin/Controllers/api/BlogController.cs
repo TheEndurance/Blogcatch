@@ -24,7 +24,7 @@ namespace Blogcatch.Areas.Admin.Controllers.api
         }
 
 
-        // POST : /admin/api/blog/AddCategory
+        // POST : /api/blog/AddCategory
         [HttpPost]
         public IHttpActionResult AddCategory([FromBody]CategoryDto categoryDto)
         {
@@ -49,7 +49,23 @@ namespace Blogcatch.Areas.Admin.Controllers.api
             return Json(category.Id);
         }
 
-
-        public IHttpActionResult ReorderCategories([FromBody])
+        // POST : /api/blog/ReorderCategories
+        [HttpPost]
+        public IHttpActionResult ReorderCategories([FromBody] int[] id)
+        {
+            int sortingOrder = 0;
+            foreach (var catId in id)
+            {
+                var category = _context.Categories.Find(catId);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+                category.Sorting = sortingOrder;
+                _context.SaveChanges();
+                sortingOrder++;
+            }
+            return Ok();
+        }
     }
 }

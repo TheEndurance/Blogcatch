@@ -127,10 +127,10 @@
                 placeholder: "ui-state-highlight",
                 update: function () {
                     var ids = JSON.stringify($("table#categories tbody").sortable("toArray"));
-
+                    console.log(ids);
                     $.ajax({
                         method: "POST",
-                        url: "/api/Blog/ReorderPages",
+                        url: "/api/Blog/ReorderCategories",
                         data: ids,
                         contentType: "application/json"
                     });

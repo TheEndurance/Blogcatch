@@ -22,7 +22,7 @@ namespace Blogcatch.Areas.Admin.Controllers.api
             _context.Dispose();
         }
 
-        // DELETE : /Admin/api/Pages/id
+        // DELETE : /api/Pages/id
 
         [HttpDelete]
         public IHttpActionResult DeletePage([FromUri]int id)
