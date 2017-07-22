@@ -1,0 +1,155 @@
+﻿@model IEnumerable<Blogcatch.ViewModel.CategoryViewModel>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+<div class="row">
+    <div class="col-md-4">
+        <p>
+            <input type="text" class="form-control" id="categoryTextInput" /><br />
+            <a href="#" class="btn btn-primary" id="categoryNewButton">Create a new category</a>
+            <span class="ajax-text hidden">
+                <img id="ajaxImage" src="~/Content/images/ajax-loader.gif" />
+            </span>
+        </p>
+    </div>
+</div>
+<table class="table sorting" id="categories">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="@item.Slug">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a href="#" data-category-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+
+            /*
+            * Create new category
+           */
+
+            var categoryTextInput = $("#categoryTextInput");
+            var categoryNewButton = $("a#categoryNewButton");
+            var ajaxText = $("span.ajax-text");
+            var ajaxImage = $("#ajaxImage");
+            var table = $("table#categories tbody");
+
+            function UpdateCategoryMessage(ajaxMessage, ajaxClass) {
+                ajaxText.removeClass("hidden");
+                ajaxText.html("<span class='alert alert-" + ajaxClass + "'>" + ajaxMessage + "</span>");
+                setTimeout(function () {
+                    ajaxText.fadeOut("fast",
+                        function () {
+                            ajaxText.html(ajaxImage.html());
+                            ajaxText.addClass("hidden");
+                        });
+                },
+                    2000);
+                return false;
+            }
+
+            categoryTextInput.keyup(function (e) { //if they hit enter instead of click button
+                if (e.KeyCode === 13) {
+                    categoryNewButton.click();
+                }
+            });
+
+            categoryNewButton.click(function (e) {
+                e.preventDefault(); //dont submit the form
+
+                var categoryName = categoryTextInput.val();
+
+                if (categoryName.length <= 2) {
+                    alert("You must enter a category name that is greater than 2 characters");
+                    return false;
+                }
+
+                var url = "/api/Blog/AddCategory";
+
+                $.post(url,
+                    { categoryName: categoryName },
+                    function (data) {
+                        var response = data.trim();
+                        if (response == "titleTaken") { //if the title is taken
+                            UpdateCategoryMessage("That title is already taken!", "danger");
+                        } else { //title is not taken
+                            if (!($("table#categories").length)) {
+                                location.reload(); //refresh the current page
+                            }
+                            else {
+                                UpdateCategoryMessage("Category successfully added!", "success");
+                                categoryTextInput.val("");
+                                var appendTo = $("table#categories tbody tr:last").clone();
+                                appendTo.attr("id", data);
+                                appendTo.Find("#item_name").val(categoryName);
+                                appendTo.Find("a.js-delete").attr("data-category-id",data);
+                                table.append(appendTo);
+                                table.sortable("refresh");
+                            }
+                        }
+                    });
+            });
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            /*
+            * Reorder Categories
+            */
+            $("table#categories tbody").sortable({
+                items: "tr:not(.home)",
+                placeholder: "ui-state-highlight",
+                update: function () {
+                    var ids = JSON.stringify($("table#categories tbody").sortable("toArray"));
+
+                    $.ajax({
+                        method: "POST",
+                        url: "/api/Blog/ReorderPages",
+                        data: ids,
+                        contentType: "application/json"
+                    });
+                }
+            });
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            /*
+            * Delete Category
+            */
+            $("a.js-delete").click(function () {
+                var id = $(this).attr("data-category-id");
+                if (confirm("Are you sure you want to delete this category?")) {
+                    $.ajax({
+                        method: "DELETE",
+                        url: "/api/Categories/DeleteCategory/?id=" + id
+                    }).done(function () {
+                        $("tr#" + id).fadeOut();
+                    });
+                }
+            });
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+        });
+    </script>
+}
