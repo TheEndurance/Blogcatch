@@ -9,6 +9,7 @@ namespace Blogcatch.Models
         public DbSet<Page> Pages { get; set; }
         public DbSet<Sidebar> Sidebar { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Post> Posts { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

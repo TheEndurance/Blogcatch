@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Blogcatch.ViewModel.PostViewModel>
+
+@{
+    ViewBag.Title = "Posts";
+}
+
+<h2>Posts</h2>
+
+<p>
+    @Html.ActionLink("Create New Post", "CreatePost")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllowComments)
+        </th>
+        <th>Modify</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Slug)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AllowComments)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditPost", new { id=item.Id }) |
+            @Html.ActionLink("Details", "PostDetails", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeletePost", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
