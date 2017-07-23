@@ -29,5 +29,11 @@ namespace Blogcatch.Areas.Admin.Controllers
                 .ToList();
             return View(postVMList);
         }
+
+        public ActionResult AddPost()
+        {
+            var postVM = new PostViewModel();
+            return View("PostForm",postVM);
+        }
     }
 }

@@ -2,6 +2,9 @@
 using Blogcatch.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
+using System.Web.Mvc;
+using Blogcatch.Areas.Admin.Controllers;
 
 namespace Blogcatch.ViewModel
 {
@@ -30,6 +33,23 @@ namespace Blogcatch.ViewModel
 
         [Display(Name = "Comments Allowed")]
         public bool AllowComments { get; set; }
+
+        public string Heading
+        {
+            get { return ((Id == 0) ? "Add a new post" : "Edit post"); }
+        }
+
+        public string Action
+        {
+            get
+            {
+                Expression<Func<PostsController, ActionResult>> AddPost = x => x.AddPost();
+                var action = (Id == 0) ? AddPost : AddPost;
+                return (AddPost.Body as MethodCallExpression).Method.Name;
+
+            }
+        }
+
 
         public PostViewModel()
         {
