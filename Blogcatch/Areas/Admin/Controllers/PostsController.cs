@@ -33,12 +33,14 @@ namespace Blogcatch.Areas.Admin.Controllers
             return View(postVMList);
         }
 
+        [HttpGet]
         public ActionResult AddPost()
         {
             var postVM = new PostViewModel();
             return View("PostForm", postVM);
         }
 
+        [HttpPost]
         public ActionResult AddPost(PostViewModel postVM)
         {
             var userId = User.Identity.GetUserId();

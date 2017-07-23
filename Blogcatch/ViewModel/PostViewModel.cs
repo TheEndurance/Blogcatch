@@ -1,10 +1,10 @@
-﻿using Blogcatch.Areas.Admin.Models;
+﻿using Blogcatch.Areas.Admin.Controllers;
+using Blogcatch.Areas.Admin.Models;
 using Blogcatch.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using Blogcatch.Areas.Admin.Controllers;
 
 namespace Blogcatch.ViewModel
 {
@@ -21,6 +21,7 @@ namespace Blogcatch.ViewModel
         [Display(Name = "Date Modified")]
         public DateTime? PostModifiedDate { get; set; }
 
+        [AllowHtml]
         public string Content { get; set; }
 
         [StringLength(100)]
