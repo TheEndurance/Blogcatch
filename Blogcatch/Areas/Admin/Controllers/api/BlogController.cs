@@ -5,9 +5,11 @@ using Blogcatch.AutoMapper;
 using Blogcatch.Models;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Routing;
 
 namespace Blogcatch.Areas.Admin.Controllers.api
 {
+    [RoutePrefix("Admin/Api/Blog")]
     public class BlogController : ApiController
     {
         private readonly ApplicationDbContext _context;
@@ -24,17 +26,14 @@ namespace Blogcatch.Areas.Admin.Controllers.api
         }
 
 
-        // POST : /api/blog/AddCategory
+        // POST : admin/api/blog/AddCategory
+        [Route("AddCategory")]
         [HttpPost]
         public IHttpActionResult AddCategory([FromBody]CategoryDto categoryDto)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
-            }
-            if (string.IsNullOrWhiteSpace(categoryDto.Name) || categoryDto.Name.Length > 50)
-            {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
             var category = new Category(categoryDto.Name);
@@ -49,7 +48,8 @@ namespace Blogcatch.Areas.Admin.Controllers.api
             return Ok(category.Id);
         }
 
-        // POST : /api/blog/ReorderCategories
+        // POST : admin/api/blog/ReorderCategories
+        [Route("ReorderCategories")]
         [HttpPost]
         public IHttpActionResult ReorderCategories([FromBody] int[] id)
         {
@@ -66,6 +66,21 @@ namespace Blogcatch.Areas.Admin.Controllers.api
                 sortingOrder++;
             }
             return Ok();
+        }
+
+        // DELETE : admin/api/blog/DeleteCategory/id
+        [Route("DeleteCategory/{id}")]
+        [HttpDelete]
+        public IHttpActionResult DeleteCategory([FromUri] int id)
+        {
+            var category = _context.Categories.Find(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+            return Ok(id);
         }
     }
 }

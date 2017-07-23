@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace Blogcatch.Areas.Admin.Controllers.api
 {
+    [RoutePrefix("Admin/Api/Pages")]
     public class PagesController : ApiController
     {
         private readonly ApplicationDbContext _context;
@@ -22,8 +23,8 @@ namespace Blogcatch.Areas.Admin.Controllers.api
             _context.Dispose();
         }
 
-        // DELETE : /api/Pages/id
-
+        // DELETE : admin/api/Pages/DeletePage/id
+        [Route("DeletePage/{id}")]
         [HttpDelete]
         public IHttpActionResult DeletePage([FromUri]int id)
         {
@@ -36,8 +37,9 @@ namespace Blogcatch.Areas.Admin.Controllers.api
             _context.SaveChanges();
             return Ok(_mapper.Map<PageDto>(page));
         }
+        // POST : admin/api/pages/ReorderPages
 
-
+        [Route("ReorderPages")]
         [HttpPost]
         public IHttpActionResult ReorderPages([FromBody]int[] id)
         {

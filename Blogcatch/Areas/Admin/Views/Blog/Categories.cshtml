@@ -33,7 +33,7 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <a href="#" data-category-id="@item.Id">Delete</a>
+                    <a href="#" class="js-delete" data-category-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
@@ -83,7 +83,7 @@
                     return false;
                 }
 
-                var url = "/api/Blog/AddCategory";
+                var url = "/admin/api/Blog/AddCategory";
                 ajaxText.fadeIn("fast");
 
                 $.ajax({
@@ -128,7 +128,7 @@
                     console.log(ids);
                     $.ajax({
                         method: "POST",
-                        url: "/api/Blog/ReorderCategories",
+                        url: "/admin/api/Blog/ReorderCategories",
                         data: ids,
                         contentType: "application/json"
                     });
@@ -145,7 +145,7 @@
                 if (confirm("Are you sure you want to delete this category?")) {
                     $.ajax({
                         method: "DELETE",
-                        url: "/api/Categories/DeleteCategory/?id=" + id
+                        url: "/admin/api/Blog/DeleteCategory/"+id
                     }).done(function () {
                         $("tr#" + id).fadeOut();
                     });
