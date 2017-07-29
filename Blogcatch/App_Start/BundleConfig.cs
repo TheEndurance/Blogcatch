@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace Blogcatch
 {
@@ -23,9 +22,9 @@ namespace Blogcatch
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/styles/css").Include(
+                      "~/Content/styles/bootstrap.css",
+                      "~/Content/styles/site.css"));
         }
     }
 }
