@@ -9,13 +9,13 @@ using System.Web.Routing;
 
 namespace Blogcatch.Areas.Admin.Controllers.api
 {
-    [RoutePrefix("Admin/Api/Blog")]
-    public class BlogController : ApiController
+    [RoutePrefix("Admin/Api/Category")]
+    public class CategoryController : ApiController
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public BlogController()
+        public CategoryController()
         {
             _context = new ApplicationDbContext();
             _mapper = WebApiMapper.GetBlogMapper();

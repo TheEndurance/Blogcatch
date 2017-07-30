@@ -5,11 +5,11 @@ using Blogcatch.ViewModel;
 
 namespace Blogcatch.Areas.Admin.Controllers
 {
-    public class BlogController : Controller
+    public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public BlogController()
+        public CategoryController()
         {
             _context = new ApplicationDbContext();
         }

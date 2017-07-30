@@ -1,5 +1,7 @@
 ﻿using Blogcatch.Models;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Blogcatch.Areas.Admin.Models
@@ -12,7 +14,7 @@ namespace Blogcatch.Areas.Admin.Models
 
         [Required]
         public string AuthorId { get; set; }
-    
+
         [Required]
         public DateTime PostDate { get; set; }
 
@@ -30,8 +32,16 @@ namespace Blogcatch.Areas.Admin.Models
 
         public bool AllowComments { get; set; }
 
+        public ICollection<PostTag> PostTags { get; set; }
+
+        public ICollection<PostCategory> PostCategories { get; set; }
+
+
         public Post()
         {
+            PostTags = new Collection<PostTag>();
+
+            PostCategories = new Collection<PostCategory>();
         }
 
     }

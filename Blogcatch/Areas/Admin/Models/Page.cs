@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Blogcatch.ViewModel;
+﻿using Blogcatch.ViewModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Blogcatch.Areas.Admin.Models
 {
@@ -41,14 +41,10 @@ namespace Blogcatch.Areas.Admin.Models
 
         public static void EditPage(PageViewModel pageVM, Page page)
         {
-            string slug = "home";
 
-            if (pageVM.Slug != "home")
-            {
-                slug = (string.IsNullOrWhiteSpace(pageVM.Slug))
-                    ? pageVM.Title.Replace(" ", "-").ToLower()
-                    : pageVM.Slug.Replace(" ", "-").ToLower();
-            }
+            var slug = (string.IsNullOrWhiteSpace(pageVM.Slug))
+                 ? pageVM.Title.Replace(" ", "-").ToLower()
+                 : pageVM.Slug.Replace(" ", "-").ToLower();
 
             page.Slug = slug;
             page.Title = pageVM.Title;

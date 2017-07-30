@@ -33,6 +33,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             return View(postVMList);
         }
 
+        // GET : Admin/Posts/AddPost
         [HttpGet]
         public ActionResult AddPost()
         {
@@ -40,6 +41,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             return View("PostForm", postVM);
         }
 
+        // POST : Admin/Posts/AddPost
         [HttpPost]
         public ActionResult AddPost(PostViewModel postVM)
         {

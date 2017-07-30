@@ -149,8 +149,13 @@
                     <li>
                         <a href="/admin/pages"><i class="fa fa-fw fa-file"></i> Pages</a>
                     </li>
-                    <li>@Html.ActionLink("Sidebar", "EditSidebar", "Pages")</li>
-                    <li>@Html.ActionLink("Categories", "Categories", "Blog")</li>
+                    <li>
+                        <a href="/admin/posts"><i class="fa fa-fw fa-pencil-square-o" aria-hidden="true" ></i> Posts</a>
+                    </li>
+                    <li>
+                        <a href="/admin/Pages/EditSidebar"><i class="fa fa-fw fa-bars"></i> Sidebar</a>
+                    </li>
+                    <li>@Html.ActionLink("Categories", "Categories", "Category")</li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

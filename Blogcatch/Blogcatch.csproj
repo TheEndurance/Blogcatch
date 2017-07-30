@@ -214,9 +214,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\api\BlogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\api\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\api\PagesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
@@ -225,7 +225,10 @@
     <Compile Include="Areas\Admin\Models\dto\PageDto.cs" />
     <Compile Include="Areas\Admin\Models\Page.cs" />
     <Compile Include="Areas\Admin\Models\Post.cs" />
+    <Compile Include="Areas\Admin\Models\PostCategory.cs" />
+    <Compile Include="Areas\Admin\Models\PostTag.cs" />
     <Compile Include="Areas\Admin\Models\Sidebar.cs" />
+    <Compile Include="Areas\Admin\Models\Tag.cs" />
     <Compile Include="AutoMapper\WebApiMapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -252,6 +255,14 @@
     <Compile Include="Migrations\201707232049291_Posts1.cs" />
     <Compile Include="Migrations\201707232049291_Posts1.Designer.cs">
       <DependentUpon>201707232049291_Posts1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707300009170_PostTag.cs" />
+    <Compile Include="Migrations\201707300009170_PostTag.Designer.cs">
+      <DependentUpon>201707300009170_PostTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707300038207_PostCategory.cs" />
+    <Compile Include="Migrations\201707300038207_PostCategory.Designer.cs">
+      <DependentUpon>201707300038207_PostCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -591,7 +602,7 @@
     <Content Include="fileman\lang\sk.json" />
     <Content Include="fileman\lang\tr.json" />
     <Content Include="fileman\web.config" />
-    <Content Include="Areas\Admin\Views\Blog\Categories.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Categories.cshtml" />
     <Content Include="Areas\Admin\Views\Posts\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Posts\PostForm.cshtml" />
     <Content Include="Content\styles\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -1049,6 +1060,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707232049291_Posts1.resx">
       <DependentUpon>201707232049291_Posts1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707300009170_PostTag.resx">
+      <DependentUpon>201707300009170_PostTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707300038207_PostCategory.resx">
+      <DependentUpon>201707300038207_PostCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
