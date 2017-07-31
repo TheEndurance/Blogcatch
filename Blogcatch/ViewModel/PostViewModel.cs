@@ -4,6 +4,7 @@ using Blogcatch.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Blogcatch.ViewModel
@@ -29,6 +30,10 @@ namespace Blogcatch.ViewModel
 
         [StringLength(100)]
         public string Slug { get; set; }
+
+        public string Jumbotron { get; set; }
+
+        public HttpPostedFileBase Image { get; set; }
 
         public string Excerpt { get; set; }
 

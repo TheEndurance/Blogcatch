@@ -264,6 +264,10 @@
     <Compile Include="Migrations\201707300038207_PostCategory.Designer.cs">
       <DependentUpon>201707300038207_PostCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707300114299_AddJumbotronToPost.cs" />
+    <Compile Include="Migrations\201707300114299_AddJumbotronToPost.Designer.cs">
+      <DependentUpon>201707300114299_AddJumbotronToPost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -1027,7 +1031,7 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\uploads\" />
     <Folder Include="fileman\aspnet_client\system_web\2_0_50727\" />
     <Folder Include="fileman\aspnet_client\system_web\4_0_30319\" />
     <Folder Include="fileman\tmp\" />
@@ -1066,6 +1070,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707300038207_PostCategory.resx">
       <DependentUpon>201707300038207_PostCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707300114299_AddJumbotronToPost.resx">
+      <DependentUpon>201707300114299_AddJumbotronToPost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

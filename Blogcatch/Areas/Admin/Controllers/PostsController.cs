@@ -3,6 +3,7 @@ using Blogcatch.Models;
 using Blogcatch.ViewModel;
 using Microsoft.AspNet.Identity;
 using System;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -65,13 +66,23 @@ namespace Blogcatch.Areas.Admin.Controllers
                 ModelState.AddModelError("", "That title or slug already exists");
             }
 
-            string excerpt = postVM.Content;
+            string excerpt = Post.TruncateHtml(postVM.Content);
+
             int length = 300;
             if (postVM.Content.Length > length)
             {
                 int lastSpace = postVM.Content.LastIndexOf(" ", length);
                 excerpt = $"{postVM.Content.Substring(0, (lastSpace > 0) ? lastSpace : length)}" + "...";
 
+            }
+
+            if (postVM.Image != null && postVM.Image.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(postVM.Image.FileName);
+                var path = Path.Combine(Server.MapPath("~/fileman/Uploads/Images"), fileName);
+                postVM.Image.SaveAs(path);
+                postVM.Jumbotron = ("/fileman/Uploads/Images/" + fileName);
+                post.Jumbotron = postVM.Jumbotron;
             }
 
 
@@ -83,6 +94,8 @@ namespace Blogcatch.Areas.Admin.Controllers
             post.AuthorId = userId;
             _context.Posts.Add(post);
             _context.SaveChanges();
+
+
 
             TempData["SM"] = "Post successfully added!";
             return View("PostForm", postVM);

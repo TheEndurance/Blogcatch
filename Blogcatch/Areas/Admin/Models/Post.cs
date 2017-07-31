@@ -22,6 +22,8 @@ namespace Blogcatch.Areas.Admin.Models
 
         public string Content { get; set; }
 
+        public string Jumbotron { get; set; }
+
         [StringLength(100)]
         public string Title { get; set; }
 
@@ -40,9 +42,19 @@ namespace Blogcatch.Areas.Admin.Models
         public Post()
         {
             PostTags = new Collection<PostTag>();
-
             PostCategories = new Collection<PostCategory>();
         }
 
+
+        public static string TruncateHtml(string input, int length = 300,
+            string ommission = "...")
+        {
+            if (input == null || input.Length < length)
+                return input;
+            int lastSpace = input.LastIndexOf(" ", length);
+            var excerpt = string.Format("{0}" + ommission, input.Substring(0, (lastSpace > 0) ?
+                lastSpace : length));
+            return excerpt.Trim();
+        }
     }
 }
