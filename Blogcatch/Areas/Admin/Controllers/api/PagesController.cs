@@ -37,8 +37,9 @@ namespace Blogcatch.Areas.Admin.Controllers.api
             _context.SaveChanges();
             return Ok(_mapper.Map<PageDto>(page));
         }
-        // POST : admin/api/pages/ReorderPages
 
+
+        // POST : admin/api/pages/ReorderPages
         [Route("ReorderPages")]
         [HttpPost]
         public IHttpActionResult ReorderPages([FromBody]int[] id)

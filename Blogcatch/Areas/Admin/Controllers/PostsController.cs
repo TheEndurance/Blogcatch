@@ -76,6 +76,7 @@ namespace Blogcatch.Areas.Admin.Controllers
 
             }
 
+            //handling image
             if (postVM.Image != null && postVM.Image.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(postVM.Image.FileName);
