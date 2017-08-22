@@ -47,7 +47,7 @@ namespace Blogcatch.Areas.Admin.Controllers
                 return View("PageForm", pageVM);
             }
 
-            var page = Page.CreatePage(pageVM);
+            var page = new Page(pageVM);
 
             if (_context.Pages.Any(p => p.Title == pageVM.Title || p.Slug == pageVM.Slug))
             {

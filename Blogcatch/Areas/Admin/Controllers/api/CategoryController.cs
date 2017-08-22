@@ -40,7 +40,7 @@ namespace Blogcatch.Areas.Admin.Controllers.api
 
             if (_context.Categories.Any(c => c.Name == category.Name))
             {
-                return Json("titleTaken");
+                return BadRequest("titleTaken");
             }
 
             _context.Categories.Add(category);

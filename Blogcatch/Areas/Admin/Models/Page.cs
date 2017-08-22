@@ -21,23 +21,20 @@ namespace Blogcatch.Areas.Admin.Models
 
         public bool HasSidebar { get; set; }
 
-
-        public static Page CreatePage(PageViewModel pageVM)
+        public Page(PageViewModel pageVM)
         {
-            var page = new Page();
-
-            page.Title = pageVM.Title;
-
-            var slug = (string.IsNullOrWhiteSpace(pageVM.Slug))
-                ? pageVM.Title.Replace(" ", "-").ToLower()
-                : pageVM.Slug.Replace(" ", "-").ToLower();
-
-            page.Slug = slug;
-            page.Body = pageVM.Body;
-            page.HasSidebar = pageVM.HasSidebar;
-            page.Sorting = 100;
-            return page;
+            this.Title = pageVM.Title;
+            this.Slug = CreateSlug(pageVM.Slug, pageVM.Title);
+            this.Body = pageVM.Body;
+            this.HasSidebar = pageVM.HasSidebar;
+            this.Sorting = 100;
         }
+
+        protected Page()
+        {
+        }
+
+
 
         public static void EditPage(PageViewModel pageVM, Page page)
         {
@@ -50,6 +47,16 @@ namespace Blogcatch.Areas.Admin.Models
             page.Title = pageVM.Title;
             page.Body = pageVM.Body;
             page.HasSidebar = pageVM.HasSidebar;
+        }
+
+
+        private static string CreateSlug(string inputSlug, string title)
+        {
+            var slug = (string.IsNullOrWhiteSpace(inputSlug))
+                ? title.Replace(" ", "-").ToLower()
+                : inputSlug.Replace(" ", "-").ToLower();
+
+            return slug;
         }
     }
 }
