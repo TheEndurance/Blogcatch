@@ -91,7 +91,7 @@ namespace Blogcatch.Areas.Admin.Controllers
                 return Content("Page not found");
             }
 
-            Page.EditPage(pageVM, page);
+            page.EditPage(pageVM);
 
             if (_context.Pages.Where(p => p.Id != pageVM.Id).Any(p => p.Title == pageVM.Title || p.Slug == pageVM.Slug))
             {

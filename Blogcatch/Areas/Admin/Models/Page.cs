@@ -35,18 +35,12 @@ namespace Blogcatch.Areas.Admin.Models
         }
 
 
-
-        public static void EditPage(PageViewModel pageVM, Page page)
+        public void EditPage(PageViewModel pageVM)
         {
-
-            var slug = (string.IsNullOrWhiteSpace(pageVM.Slug))
-                 ? pageVM.Title.Replace(" ", "-").ToLower()
-                 : pageVM.Slug.Replace(" ", "-").ToLower();
-
-            page.Slug = slug;
-            page.Title = pageVM.Title;
-            page.Body = pageVM.Body;
-            page.HasSidebar = pageVM.HasSidebar;
+            this.Slug = CreateSlug(pageVM.Slug, pageVM.Title);
+            this.Title = pageVM.Title;
+            this.Body = pageVM.Body;
+            this.HasSidebar = pageVM.HasSidebar;
         }
 
 
