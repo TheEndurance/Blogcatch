@@ -3,17 +3,20 @@
 @{
     ViewBag.Title = Model.Heading;
 }
+@section Styles {
+    <link rel="stylesheet" href="~/Content/styles/tagify.css" />
+}
 <div class="container">
 
     <h2>Add Post</h2>
 
 
-    @using (Html.BeginForm(Model.Action, "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm(Model.Action, "Posts", FormMethod.Post, new { enctype = "multipart/form-data", id = "PostForm" }))
     {
         <div class="row">
-            
+
             <!-- MAIN FORM-->
-            <div class="col-sm-8 col-md-8">
+            <div class="col-sm-7 col-md-7">
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
@@ -21,22 +24,22 @@
                     {
                         <div class="alert alert-success">@TempData["SM"]</div>
                     }
-                    <hr/>
-                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.TextBoxFor(model => model.Title, null, new {@class = "form-control"})
-                            @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                            @Html.TextBoxFor(model => model.Title, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Slug, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.TextBoxFor(model => model.Slug, null, new {@class = "form-control"})
-                            @Html.ValidationMessageFor(model => model.Slug, "", new {@class = "text-danger"})
+                            @Html.TextBoxFor(model => model.Slug, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -52,45 +55,56 @@
                                 </span>
                                 <input type="text" class="form-control" readonly>
                             </div>
-                            <img style="max-width: 400px" id='img-upload'/>
+                            <img style="max-width: 400px" id='img-upload' />
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Content, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.TextAreaFor(model => model.Content, new {@class = "form-control"})
-                            @Html.ValidationMessageFor(model => model.Content, "", new {@class = "text-danger"})
+                            @Html.TextAreaFor(model => model.Content, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.AllowComments, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.LabelFor(model => model.AllowComments, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             <div class="checkbox">
                                 @Html.CheckBoxFor(model => model.AllowComments)
-                                @Html.ValidationMessageFor(model => model.AllowComments, "", new {@class = "text-danger"})
+                                @Html.ValidationMessageFor(model => model.AllowComments, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-default"/>
+                            <input type="submit" value="Create" class="btn btn-default" />
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- SIDE AREA OF FORM -->
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-5 col-md-5">
+                <div class="form-horizontal">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.Title, null, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                    <input type="hidden" id="Tags" name="Tags" value=""/>
+
+                    <label class="control-label col-md-2">Tags</label>
+
+                    <div class="col-md-10" id="tagify">
+                        <!---Tagify will initialize here-->
+                    </div>
+                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CategoryId, htmlAttributes: new {@class = "control-label  col-md-2"})
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select a blog category", new {@class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new {@class = "text-danger"})
+                        </div>
                     </div>
                 </div>
             </div>
@@ -101,14 +115,21 @@
         @Html.ActionLink("Back to Posts", "Index")
     </div>
 </div>
-
 @section Scripts {
-    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/tagify.js"></script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
     <script>
+        /*
+        * CK Editor
+        */
         CKEDITOR.replace("Content");
+        ////////////////////////////////////////////////////////////////
         $(document).ready(function () {
 
+            /*
+            * Display Picture
+            */
             $(document).on('change', '.btn-file :file', function () {
                 var input = $(this);
                 var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -142,6 +163,14 @@
             $("#Image").change(function () {
                 readURL(this);
             });
+            //////////////////////////////////////////////////////////////
+
+            /*
+            * Tagify
+            */
+            $("#tagify").tagify();
+            $("#tagify").tagify('InsertJsonArrayToForm', 'PostForm', 'Tags');
+
         });
     </script>
 }

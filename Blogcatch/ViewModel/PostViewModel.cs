@@ -23,9 +23,11 @@ namespace Blogcatch.ViewModel
         [Display(Name = "Date Modified")]
         public DateTime? PostModifiedDate { get; set; }
 
+        [Required]
         [AllowHtml]
         public string Content { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string Title { get; set; }
 
@@ -41,9 +43,11 @@ namespace Blogcatch.ViewModel
         [Display(Name = "Comments Allowed")]
         public bool AllowComments { get; set; }
 
+        [Required]
+        [Display(Name = "Blog Category")]
         public int CategoryId { get; set; }
 
-        public string TagsJSON { get; set; }
+        public string Tags { get; set; }
 
         public IEnumerable<Category> Categories { get; set; }
 

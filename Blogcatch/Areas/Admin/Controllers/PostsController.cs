@@ -38,7 +38,9 @@ namespace Blogcatch.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult AddPost()
         {
+            var categories = _context.Categories.ToList();
             var postVM = new PostViewModel();
+            postVM.Categories = categories;
             return View("PostForm", postVM);
         }
 
@@ -99,6 +101,10 @@ namespace Blogcatch.Areas.Admin.Controllers
 
 
             TempData["SM"] = "Post successfully added!";
+
+            var categories = _context.Categories.ToList();
+            postVM.Categories = categories;
+
             return View("PostForm", postVM);
         }
     }

@@ -292,6 +292,7 @@
     <Content Include="Content\styles\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\styles\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\styles\sb-admin.css" />
+    <Content Include="Content\styles\tagify.css" />
     <Content Include="favicon.ico" />
     <Content Include="fileman\css\images\animated-overlay.gif" />
     <Content Include="fileman\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -997,6 +998,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\tagify.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
