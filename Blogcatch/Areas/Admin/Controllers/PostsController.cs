@@ -82,8 +82,8 @@ namespace Blogcatch.Areas.Admin.Controllers
                 var fileName = Path.GetFileName(postVM.Image.FileName);
                 var path = Path.Combine(Server.MapPath("~/fileman/Uploads/Images"), fileName);
                 postVM.Image.SaveAs(path);
-                postVM.Jumbotron = ("/fileman/Uploads/Images/" + fileName);
-                post.Jumbotron = postVM.Jumbotron;
+                postVM.DisplayPicture = ("/fileman/Uploads/Images/" + fileName);
+                post.DisplayPicture = postVM.DisplayPicture;
             }
 
 

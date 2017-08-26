@@ -22,7 +22,7 @@ namespace Blogcatch.Areas.Admin.Models
 
         public string Content { get; set; }
 
-        public string Jumbotron { get; set; }
+        public string DisplayPicture { get; set; }
 
         [StringLength(100)]
         public string Title { get; set; }

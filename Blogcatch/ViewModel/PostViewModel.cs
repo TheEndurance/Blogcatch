@@ -2,6 +2,7 @@
 using Blogcatch.Areas.Admin.Models;
 using Blogcatch.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web;
@@ -31,7 +32,7 @@ namespace Blogcatch.ViewModel
         [StringLength(100)]
         public string Slug { get; set; }
 
-        public string Jumbotron { get; set; }
+        public string DisplayPicture { get; set; }
 
         public HttpPostedFileBase Image { get; set; }
 
@@ -39,6 +40,13 @@ namespace Blogcatch.ViewModel
 
         [Display(Name = "Comments Allowed")]
         public bool AllowComments { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public string TagsJSON { get; set; }
+
+        public IEnumerable<Category> Categories { get; set; }
+
 
         public string Heading
         {

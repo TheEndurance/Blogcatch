@@ -3,90 +3,103 @@
 @{
     ViewBag.Title = Model.Heading;
 }
-<div class="row">
-<div class="col-sm-8">
+<div class="container">
 
     <h2>Add Post</h2>
 
 
     @using (Html.BeginForm(Model.Action, "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @Html.AntiForgeryToken()
+        <div class="row">
+            
+            <!-- MAIN FORM-->
+            <div class="col-sm-8 col-md-8">
+                @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            @if (TempData["SM"] != null)
-            {
-                <div class="alert alert-success">@TempData["SM"]</div>
-            }
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-horizontal">
+                    @if (TempData["SM"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["SM"]</div>
+                    }
+                    <hr/>
+                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Title, null, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Slug, null, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-
-            <div class="form-group">
-                <label class="control-label col-md-2" for="Image">Blog Post Display Picture</label>
-                <div class="col-md-10">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <span class="btn btn-default btn-file">
-                                Browse… <input type="file" id="Image" name="Image">
-                            </span>
-                        </span>
-                        <input type="text" class="form-control" readonly>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Title, null, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                        </div>
                     </div>
-                    <img style="max-width:400px" id='img-upload' />
-                </div>
-            </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Slug, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Slug, null, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.Slug, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
 
 
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Image">Blog Post Display Picture</label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-default btn-file">
+                                        Browse… <input type="file" id="Image" name="Image">
+                                    </span>
+                                </span>
+                                <input type="text" class="form-control" readonly>
+                            </div>
+                            <img style="max-width: 400px" id='img-upload'/>
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Content, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-                </div>
-            </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Content, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.Content, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
 
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.AllowComments, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.CheckBoxFor(model => model.AllowComments)
-                        @Html.ValidationMessageFor(model => model.AllowComments, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AllowComments, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.AllowComments)
+                                @Html.ValidationMessageFor(model => model.AllowComments, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default"/>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+            <!-- SIDE AREA OF FORM -->
+            <div class="col-sm-4 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Title, null, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                    </div>
                 </div>
             </div>
         </div>
     }
 
-    <div>
+    <div class="row">
         @Html.ActionLink("Back to Posts", "Index")
     </div>
-</div>
 </div>
 
 @section Scripts {
@@ -97,8 +110,8 @@
         $(document).ready(function () {
 
             $(document).on('change', '.btn-file :file', function () {
-                var input = $(this),
-                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                var input = $(this);
+                var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
                 input.trigger('fileselect', [label]);
             });
 
