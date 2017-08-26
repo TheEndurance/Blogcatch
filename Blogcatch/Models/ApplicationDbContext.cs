@@ -15,7 +15,6 @@ namespace Blogcatch.Models
 
         public DbSet<PostTag> PostTags { get; set; }
 
-        public DbSet<PostCategory> PostCategories { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

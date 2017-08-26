@@ -225,7 +225,6 @@
     <Compile Include="Areas\Admin\Models\dto\PageDto.cs" />
     <Compile Include="Areas\Admin\Models\Page.cs" />
     <Compile Include="Areas\Admin\Models\Post.cs" />
-    <Compile Include="Areas\Admin\Models\PostCategory.cs" />
     <Compile Include="Areas\Admin\Models\PostTag.cs" />
     <Compile Include="Areas\Admin\Models\Sidebar.cs" />
     <Compile Include="Areas\Admin\Models\Tag.cs" />
@@ -271,6 +270,10 @@
     <Compile Include="Migrations\201708262149287_ChangePostColumnJumbotronName.cs" />
     <Compile Include="Migrations\201708262149287_ChangePostColumnJumbotronName.Designer.cs">
       <DependentUpon>201708262149287_ChangePostColumnJumbotronName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708262328200_RemovePostCategories.cs" />
+    <Compile Include="Migrations\201708262328200_RemovePostCategories.Designer.cs">
+      <DependentUpon>201708262328200_RemovePostCategories.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1082,6 +1085,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708262149287_ChangePostColumnJumbotronName.resx">
       <DependentUpon>201708262149287_ChangePostColumnJumbotronName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708262328200_RemovePostCategories.resx">
+      <DependentUpon>201708262328200_RemovePostCategories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

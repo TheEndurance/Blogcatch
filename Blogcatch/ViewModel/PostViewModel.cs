@@ -44,7 +44,7 @@ namespace Blogcatch.ViewModel
         public bool AllowComments { get; set; }
 
         [Required]
-        [Display(Name = "Blog Category")]
+        [Display(Name = "Post Category")]
         public int CategoryId { get; set; }
 
         public string Tags { get; set; }

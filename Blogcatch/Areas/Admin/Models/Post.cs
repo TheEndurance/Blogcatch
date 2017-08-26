@@ -36,13 +36,12 @@ namespace Blogcatch.Areas.Admin.Models
 
         public ICollection<PostTag> PostTags { get; set; }
 
-        public ICollection<PostCategory> PostCategories { get; set; }
+        public Category Category { get; set; }
 
 
         public Post()
         {
             PostTags = new Collection<PostTag>();
-            PostCategories = new Collection<PostCategory>();
         }
 
 
