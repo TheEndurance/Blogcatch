@@ -5,6 +5,8 @@ namespace Blogcatch.Areas.Admin.Models
 {
     public class PostTag
     {
+
+
         public Post Post { get; set; }
         public Tag Tag { get; set; }
 
@@ -15,5 +17,16 @@ namespace Blogcatch.Areas.Admin.Models
         [Key]
         [Column(Order = 2)]
         public int TagId { get; set; }
+
+        public PostTag(int postId, int tagId)
+        {
+            PostId = postId;
+            TagId = tagId;
+        }
+
+        public PostTag()
+        {
+
+        }
     }
 }

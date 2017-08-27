@@ -9,7 +9,10 @@
 <div class="container">
 
     <h2>Add Post</h2>
-
+    @if (TempData["SM"] != null)
+    {
+        <div class="alert alert-success">@TempData["SM"]</div>
+    }
 
     @using (Html.BeginForm(Model.Action, "Posts", FormMethod.Post, new { enctype = "multipart/form-data", id = "PostForm" }))
     {
@@ -20,10 +23,6 @@
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    @if (TempData["SM"] != null)
-                    {
-                        <div class="alert alert-success">@TempData["SM"]</div>
-                    }
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

@@ -90,6 +90,8 @@ namespace Blogcatch.Areas.Admin.Controllers
                 post.DisplayPicture = postVM.DisplayPicture;
             }
 
+            //set post values and create the post
+
             post.Slug = slug;
             post.PostDate = DateTime.Now;
             post.AllowComments = postVM.AllowComments;
@@ -103,38 +105,31 @@ namespace Blogcatch.Areas.Admin.Controllers
             //handling post tags
             if (postVM.Tags.Length > 0)
             {
+                //Deserialize JSON array to a list of strings
                 var tags = JsonConvert.DeserializeObject<List<string>>(postVM.Tags);
-                foreach (string t in tags)
+                foreach (string tagName in tags)
                 {
-                    var tag = _context.Tags.SingleOrDefault(x => x.Name == t);
-                    if (tag != null)
+
+                    var tag = _context.Tags.SingleOrDefault(x => x.Name == tagName);
+                    if (tag != null) //check if the tag already exists
                     {
-                        var postTag = new PostTag();
-                        postTag.PostId = post.Id;
-                        postTag.TagId = tag.Id;
+                        var postTag = new PostTag(post.Id, tag.Id);
                         _context.PostTags.Add(postTag);
                     }
-                    else
+                    else // otherwise create the tag
                     {
-                        tag = new Tag();
-                        tag.Name = t;
+                        tag = new Tag(tagName);
                         _context.Tags.Add(tag);
                         _context.SaveChanges();
 
-                        var postTag = new PostTag();
-                        postTag.PostId = post.Id;
-                        postTag.TagId = tag.Id;
+                        var postTag = new PostTag(post.Id, tag.Id);
                         _context.PostTags.Add(postTag);
                         _context.SaveChanges();
 
                     }
-                    
+
                 }
             }
-
-
-
-
 
 
             TempData["SM"] = "Post successfully added!";
