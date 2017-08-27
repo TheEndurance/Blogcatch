@@ -7,9 +7,6 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.container-fluid {
-    padding: 30px;
-}
 .dl-horizontal dt {
     white-space: normal;
 }

@@ -70,7 +70,7 @@ hr.small {
 }
 @media only screen and (min-width: 768px) {
   .navbar-custom {
-    background: transparent;
+    background: rgba(0,0,0,0.5);
     border-bottom: 1px solid transparent;
   }
   .navbar-custom .navbar-brand {
