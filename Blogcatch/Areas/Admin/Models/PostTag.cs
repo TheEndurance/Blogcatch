@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blogcatch.Areas.Admin.Models
@@ -18,10 +19,18 @@ namespace Blogcatch.Areas.Admin.Models
         [Column(Order = 2)]
         public int TagId { get; set; }
 
-        public PostTag(int postId, int tagId)
+        public PostTag(Post post, Tag tag)
         {
-            PostId = postId;
-            TagId = tagId;
+            if (post == null)
+            {
+                throw new ArgumentNullException(nameof(post));
+            }
+            if (tag == null)
+            {
+                throw new ArgumentNullException(nameof(tag));
+            }
+            Post = post;
+            Tag = tag;
         }
 
         public PostTag()

@@ -1,9 +1,12 @@
 ﻿using Blogcatch.Models;
+using Blogcatch.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
+using System.Web;
 
 namespace Blogcatch.Areas.Admin.Models
 {
@@ -47,21 +50,84 @@ namespace Blogcatch.Areas.Admin.Models
 
 
 
+        public Post(PostViewModel postVM, string userId)
+        {
+            if (postVM == null)
+            {
+                throw new ArgumentNullException(nameof(postVM));
+            }
+            if (userId == null)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
+            PostTags = new Collection<PostTag>();
+            this.PostDate = DateTime.Now;
+            this.AllowComments = postVM.AllowComments;
+            this.Content = postVM.Content;
+            this.AuthorId = userId;
+            this.CategoryId = postVM.CategoryId;
+            SetExcerpt(postVM.Content);
+            SetSlug(postVM.Title, postVM.Slug);
+            SetDisplayPicture(postVM.Image);
+        }
+
         public Post()
         {
             PostTags = new Collection<PostTag>();
         }
 
-
-        public static string TruncateHtml(string input, int length = 300,
+        /// <summary>
+        /// Creates the blog post excerpt by truncating the content length
+        /// </summary>
+        private void SetExcerpt(string input, int length = 300,
             string ommission = "...")
         {
             if (input == null || input.Length < length)
-                return input;
+            {
+                this.Excerpt = input;
+                return;
+            }
             int lastSpace = input.LastIndexOf(" ", length);
-            var excerpt = string.Format("{0}" + ommission, input.Substring(0, (lastSpace > 0) ?
-                lastSpace : length));
-            return excerpt.Trim();
+            var excerpt = $"{input.Substring(0, (lastSpace > 0) ? lastSpace : length)}" + "...";
+            this.Excerpt = excerpt.Trim();
         }
+
+        /// <summary>
+        /// Set the post slug
+        /// </summary>
+        private void SetSlug(string postTitle, string postSlug)
+        {
+            string slug = "";
+
+            this.Title = postTitle;
+            slug = (string.IsNullOrWhiteSpace(postSlug))
+                ? postTitle.Replace(" ", "-")
+                : postSlug.Replace(" ", "-");
+
+        }
+
+        /// <summary>
+        /// Set the display picture image url
+        /// </summary>
+        private void SetDisplayPicture(HttpPostedFileBase Image)
+        {
+            if (Image != null && Image.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(Image.FileName);
+                var path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/fileman/Uploads/Images"), fileName);
+                Image.SaveAs(path);
+                this.DisplayPicture = ("/fileman/Uploads/Images/" + fileName);
+            }
+        }
+
+        /// <summary>
+        /// Links a tag and post to create the intermediary PostTag table entry
+        /// </summary>
+        public void AttachTag(Tag tag)
+        {
+            var postTag = new PostTag(this, tag);
+            PostTags.Add(postTag);
+        }
+
     }
 }
