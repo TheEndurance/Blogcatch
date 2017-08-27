@@ -2,7 +2,9 @@
 using Blogcatch.Models;
 using Blogcatch.ViewModel;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -89,14 +91,41 @@ namespace Blogcatch.Areas.Admin.Controllers
             }
 
 
+
             post.Slug = slug;
             post.PostDate = DateTime.Now;
             post.AllowComments = postVM.AllowComments;
             post.Content = postVM.Content;
             post.Excerpt = excerpt;
             post.AuthorId = userId;
+            post.CategoryId = postVM.CategoryId;
             _context.Posts.Add(post);
             _context.SaveChanges();
+
+            //handling post tags
+            if (postVM.Tags.Length > 0)
+            {
+                var tags = JsonConvert.DeserializeObject<List<string>>(postVM.Tags);
+                foreach (string t in tags)
+                {
+                    var tag = _context.Tags.Single(x => x.Name == t);
+                    if (tag != null)
+                    {
+                        var postTag = new PostTag();
+                        postTag.PostId = post.Id;
+                        postTag.TagId = tag.Id;
+                        _context.PostTags.Add(postTag);
+                    }
+                    else
+                    {
+                        tag = new Tag();
+                        tag.Name = t;
+                        _context.Tags.Add(tag);
+                    }
+                    _context.SaveChanges();
+                }
+
+            }
 
 
 

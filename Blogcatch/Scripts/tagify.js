@@ -24,8 +24,8 @@
         /*
         * Returns all of the tags as a JsonArray and appends the values as a hidden field in a form
         */
-        InsertJsonArrayToForm: function (formID, hiddenInputName, debugMode = false) {
-            $("#" + formID).submit(function () {
+        InsertJsonArrayToForm: function (formID, hiddenInputName, debugMode =false) {
+            $("#" + formID).submit(function() {
                 var spanTags = $("#rj-tag-box span.tag");
                 var tagText = [];
 
@@ -45,9 +45,12 @@
                     $("#" + formID).append(hiddenInput);
                 }
                 if (debugMode === true) {
-                    alert("The values in the hidden field: " + hiddenInputName + " is: " + $("#" + hiddenInputName).val());
+                    alert("The values in the hidden field: " +
+                        hiddenInputName +
+                        " is: " +
+                        $("#" + hiddenInputName).val());
                 }
-            })
+            });
         }
     }
 
@@ -65,13 +68,13 @@
             $.error('Method ' + methodOrOptions + ' does not exist on jQuery.tagify');
         }
         /*
-        * When user presses enter on the input, it will trigger 'CreateTag' function and send the value of the
+        * When user presses space on the input, it will trigger 'CreateTag' function and send the value of the
         * input as a parameter
         */
         document.getElementById("rj-tag-input").onkeypress = function (e) {
             if (!e) e = window.event;
             var keyCode = e.keyCode || e.which;
-            if (keyCode == '13') {
+            if (keyCode == '32') {
                 var tagText = this.value.trim();
                 if (tagText.length > 0) {
                     CreateTag(tagText);

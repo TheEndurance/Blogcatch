@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blogcatch.Areas.Admin.Models
 {
@@ -24,6 +25,7 @@ namespace Blogcatch.Areas.Admin.Models
 
         public string DisplayPicture { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string Title { get; set; }
 
@@ -36,7 +38,13 @@ namespace Blogcatch.Areas.Admin.Models
 
         public ICollection<PostTag> PostTags { get; set; }
 
+
         public Category Category { get; set; }
+
+        [ForeignKey("Category")]
+        [Required]
+        public int CategoryId { get; set; }
+
 
 
         public Post()

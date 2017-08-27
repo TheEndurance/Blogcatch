@@ -82,6 +82,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -157,9 +161,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -274,6 +275,10 @@
     <Compile Include="Migrations\201708262328200_RemovePostCategories.cs" />
     <Compile Include="Migrations\201708262328200_RemovePostCategories.Designer.cs">
       <DependentUpon>201708262328200_RemovePostCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708262339269_AddForeignKeyCategoryId.cs" />
+    <Compile Include="Migrations\201708262339269_AddForeignKeyCategoryId.Designer.cs">
+      <DependentUpon>201708262339269_AddForeignKeyCategoryId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1088,6 +1093,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708262328200_RemovePostCategories.resx">
       <DependentUpon>201708262328200_RemovePostCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708262339269_AddForeignKeyCategoryId.resx">
+      <DependentUpon>201708262339269_AddForeignKeyCategoryId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
