@@ -90,8 +90,6 @@ namespace Blogcatch.Areas.Admin.Controllers
                 post.DisplayPicture = postVM.DisplayPicture;
             }
 
-
-
             post.Slug = slug;
             post.PostDate = DateTime.Now;
             post.AllowComments = postVM.AllowComments;
@@ -108,7 +106,7 @@ namespace Blogcatch.Areas.Admin.Controllers
                 var tags = JsonConvert.DeserializeObject<List<string>>(postVM.Tags);
                 foreach (string t in tags)
                 {
-                    var tag = _context.Tags.Single(x => x.Name == t);
+                    var tag = _context.Tags.SingleOrDefault(x => x.Name == t);
                     if (tag != null)
                     {
                         var postTag = new PostTag();
@@ -121,11 +119,21 @@ namespace Blogcatch.Areas.Admin.Controllers
                         tag = new Tag();
                         tag.Name = t;
                         _context.Tags.Add(tag);
-                    }
-                    _context.SaveChanges();
-                }
+                        _context.SaveChanges();
 
+                        var postTag = new PostTag();
+                        postTag.PostId = post.Id;
+                        postTag.TagId = tag.Id;
+                        _context.PostTags.Add(postTag);
+                        _context.SaveChanges();
+
+                    }
+                    
+                }
             }
+
+
+
 
 
 

@@ -50,7 +50,7 @@
                         " is: " +
                         $("#" + hiddenInputName).val());
                 }
-            });
+            })
         }
     }
 
