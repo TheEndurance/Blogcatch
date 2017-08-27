@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model IEnumerable<Blogcatch.Models.BlogPostViewModel>
 
 @{
     ViewBag.Title = "Home";
@@ -19,3 +19,38 @@
         </div>
     </div>
 </header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Main page heading -->
+            <h1 class="page-header">
+                Blogcatch
+                <small>Blogging CMS</small>
+            </h1>
+            @foreach (var post in Model)
+            {
+                <!-- Blog post -->
+                <h2>
+                    <a href="#">@post.Title</a>
+                </h2>
+                <p class="lead">@post.Author.UserName</p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on @post.PostDate</p>
+                <hr>
+                if (post.DisplayPicture!=null)
+                {
+                    <img class="img-responsive" src="@post.DisplayPicture" alt="">
+                }
+                else
+                {
+                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                }
+                <hr>
+                <p>@post.Excerpt</p>
+                <a class="btn btn-primary" href="/Post?title=@post.Slug">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                <hr>
+            }
+
+        </div>
+    </div>
+</div>

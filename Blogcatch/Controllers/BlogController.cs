@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Blogcatch.Models;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Blogcatch.Models;
 
 namespace Blogcatch.Controllers
 {
@@ -24,9 +22,15 @@ namespace Blogcatch.Controllers
         // GET: Blog
         public ActionResult Index()
         {
-            var posts = _context.Posts.ToList();
-            return View();
-
+            var blogPostVM = _context.Posts
+                .Include(x => x.Author)
+                .Include(x => x.PostTags.Select(p => p.Tag))
+                .OrderByDescending(x => x.PostDate)
+                .Take(5)
+                .ToArray()
+                .Select(x => new BlogPostViewModel(x))
+                .ToList();
+            return View(blogPostVM);
         }
     }
 }
