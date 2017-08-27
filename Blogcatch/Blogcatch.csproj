@@ -296,6 +296,7 @@
     <Content Include="Content\styles\bootstrap.css" />
     <Content Include="Content\styles\bootstrap.min.css" />
     <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\styles\clean-blog.css" />
     <Content Include="Content\styles\font-awesome\css\font-awesome.css" />
     <Content Include="Content\styles\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\styles\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -996,6 +997,7 @@
     <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
     <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
     <Content Include="Scripts\ckeditor\themes\default\theme.js" />
+    <Content Include="Scripts\clean-blog.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

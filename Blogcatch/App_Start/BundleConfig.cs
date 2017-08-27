@@ -22,8 +22,14 @@ namespace Blogcatch
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/styles/css").Include(
+            bundles.Add(new StyleBundle("~/Content/styles/css/back").Include(
+                "~/Content/styles/bootstrap.css",
+                "~/Content/styles/tagify.css",
+                "~/Content/styles/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/styles/css/front").Include(
                       "~/Content/styles/bootstrap.css",
+                      "~/Content/styles/clean-blog.css",
                       "~/Content/styles/site.css"));
         }
     }

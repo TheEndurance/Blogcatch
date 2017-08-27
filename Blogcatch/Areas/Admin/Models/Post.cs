@@ -114,7 +114,7 @@ namespace Blogcatch.Areas.Admin.Models
             if (Image != null && Image.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(Image.FileName);
-                var path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/fileman/Uploads/Images"), fileName);
+                var path = Path.Combine(HttpContext.Current.Server.MapPath("~/fileman/Uploads/Images"), fileName);
                 Image.SaveAs(path);
                 this.DisplayPicture = ("/fileman/Uploads/Images/" + fileName);
             }
