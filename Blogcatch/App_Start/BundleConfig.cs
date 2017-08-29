@@ -23,7 +23,7 @@ namespace Blogcatch
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/front-js").Include(
-                "~/Scripts/"));
+                "~/Scripts/clean-blog.js"));
 
             bundles.Add(new StyleBundle("~/Content/styles/css/back").Include(
                 "~/Content/styles/bootstrap.css",
@@ -33,7 +33,8 @@ namespace Blogcatch
             bundles.Add(new StyleBundle("~/Content/styles/css/front").Include(
                       "~/Content/styles/bootstrap.css",
                       "~/Content/styles/site.css",
-                "~/Content/styles/clean-blog.css"));
+                "~/Content/styles/clean-blog.css",
+                "~/Content/styles/font-awesome/css/font-awesome.min.css"));
         }
     }
 }

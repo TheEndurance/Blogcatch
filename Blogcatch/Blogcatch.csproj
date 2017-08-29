@@ -268,10 +268,6 @@
     <Compile Include="Migrations\201707300114299_AddJumbotronToPost.Designer.cs">
       <DependentUpon>201707300114299_AddJumbotronToPost.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708262149287_ChangePostColumnJumbotronName.cs" />
-    <Compile Include="Migrations\201708262149287_ChangePostColumnJumbotronName.Designer.cs">
-      <DependentUpon>201708262149287_ChangePostColumnJumbotronName.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201708262328200_RemovePostCategories.cs" />
     <Compile Include="Migrations\201708262328200_RemovePostCategories.Designer.cs">
       <DependentUpon>201708262328200_RemovePostCategories.cs</DependentUpon>
@@ -1092,9 +1088,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707300114299_AddJumbotronToPost.resx">
       <DependentUpon>201707300114299_AddJumbotronToPost.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708262149287_ChangePostColumnJumbotronName.resx">
-      <DependentUpon>201708262149287_ChangePostColumnJumbotronName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708262328200_RemovePostCategories.resx">
       <DependentUpon>201708262328200_RemovePostCategories.cs</DependentUpon>

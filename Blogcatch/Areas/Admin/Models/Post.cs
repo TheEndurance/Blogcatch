@@ -79,7 +79,7 @@ namespace Blogcatch.Areas.Admin.Models
         /// <summary>
         /// Creates the blog post excerpt by truncating the content length
         /// </summary>
-        private void SetExcerpt(string input, int length = 300,
+        private void SetExcerpt(string input, int length = 500,
             string ommission = "...")
         {
             if (input == null || input.Length < length)
