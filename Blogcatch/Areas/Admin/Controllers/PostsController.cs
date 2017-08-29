@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace Blogcatch.Areas.Admin.Controllers
 {
@@ -51,12 +52,10 @@ namespace Blogcatch.Areas.Admin.Controllers
         public ActionResult AddPost(PostViewModel postVM)
         {
             var userId = User.Identity.GetUserId();
-
             if (!ModelState.IsValid)
             {
                 return View("PostForm", postVM);
             }
-
             //create new post
             var post = new Post(postVM,userId);
 
@@ -64,7 +63,6 @@ namespace Blogcatch.Areas.Admin.Controllers
             {
                 ModelState.AddModelError("", "That title or slug already exists");
             }
-
             //handling post tags
             if (postVM.Tags.Length > 0)
             {
@@ -72,7 +70,6 @@ namespace Blogcatch.Areas.Admin.Controllers
                 var tags = JsonConvert.DeserializeObject<List<string>>(postVM.Tags);
                 foreach (string tagName in tags)
                 {
-
                     var tag = _context.Tags.SingleOrDefault(x => x.Name == tagName);
                     if (tag == null) //check if the tag doesn't exist
                     {
@@ -87,11 +84,23 @@ namespace Blogcatch.Areas.Admin.Controllers
             _context.SaveChanges();
 
             TempData["SM"] = "Post successfully added!";
-
-            var categories = _context.Categories.ToList();
-            postVM.Categories = categories;
+            postVM.Categories = _context.Categories.ToList();
 
             return View("PostForm", postVM);
+        }
+
+        //GET : Admin/Posts/EditPost
+        public ActionResult EditPost(int id)
+        {
+            var post = _context.Posts.Include(x=>x.PostTags.Select(p=>p.Tag)).SingleOrDefault(x=>x.Id==id);
+            if (post == null)
+            {
+                return Content("Post not found");
+            }
+            var postVM = new PostViewModel(post);
+            postVM.Categories = _context.Categories.ToList();
+
+            return View("PostForm",postVM);
         }
     }
 }

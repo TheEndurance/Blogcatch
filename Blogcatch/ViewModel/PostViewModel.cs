@@ -52,6 +52,7 @@ namespace Blogcatch.ViewModel
         public IEnumerable<Category> Categories { get; set; }
 
 
+
         public string Heading
         {
             get { return ((Id == 0) ? "Add a new post" : "Edit post"); }
@@ -80,7 +81,10 @@ namespace Blogcatch.ViewModel
             this.PostDate = post.PostDate;
             this.PostModifiedDate = post.PostModifiedDate;
             this.Content = post.Content;
+            this.DisplayPicture = post.DisplayPicture;
             this.Title = post.Title;
+            this.Tags = post.GetJsonPostTags();
+            this.CategoryId = post.CategoryId;
             this.Slug = post.Slug;
             this.Excerpt = post.Excerpt;
             this.AllowComments = post.AllowComments;

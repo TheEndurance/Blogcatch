@@ -54,7 +54,7 @@
                                 </span>
                                 <input type="text" class="form-control" readonly>
                             </div>
-                            <img style="max-width: 400px" id='img-upload' />
+                            <img style="max-width: 400px" id='img-upload' src="@Model.DisplayPicture" />
                         </div>
                     </div>
 
@@ -90,7 +90,7 @@
             <div class="col-sm-5 col-md-5">
                 <div class="form-horizontal">
                 <div class="form-group">
-                    <input type="hidden" id="Tags" name="Tags" value=""/>
+                    <input type="hidden" id="Tags" name="Tags" value="@Model.Tags"/>
 
                     <label class="control-label col-md-2">Tags</label>
 

@@ -1,11 +1,13 @@
 ﻿using Blogcatch.Models;
 using Blogcatch.ViewModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
+using System.Linq;
 using System.Web;
 
 namespace Blogcatch.Areas.Admin.Models
@@ -127,6 +129,21 @@ namespace Blogcatch.Areas.Admin.Models
         {
             var postTag = new PostTag(this, tag);
             PostTags.Add(postTag);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetJsonPostTags()
+        {
+            List<string> tags = new List<string>();
+            foreach (var tagName in PostTags.Select(x => x.Tag.Name))
+            {
+                tags.Add(tagName);
+            }
+            var JsonTags = JsonConvert.SerializeObject(tags);
+            return JsonTags;
         }
 
     }
