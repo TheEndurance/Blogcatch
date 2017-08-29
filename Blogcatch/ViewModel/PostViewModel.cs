@@ -63,8 +63,9 @@ namespace Blogcatch.ViewModel
             get
             {
                 Expression<Func<PostsController, ActionResult>> AddPost = x => x.AddPost();
-                var action = (Id == 0) ? AddPost : AddPost;
-                return (AddPost.Body as MethodCallExpression).Method.Name;
+                Expression<Func<PostsController, ActionResult>> EditPost = x => x.EditPost(null);
+                var action = (Id == 0) ? AddPost : EditPost;
+                return (action.Body as MethodCallExpression).Method.Name;
 
             }
         }

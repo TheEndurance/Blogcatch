@@ -102,5 +102,11 @@ namespace Blogcatch.Areas.Admin.Controllers
 
             return View("PostForm",postVM);
         }
+        // POST : Admin/Posts/EditPost
+        [HttpPost]
+        public ActionResult EditPost(PostViewModel postVM)
+        {
+            return View();
+        }
     }
 }
