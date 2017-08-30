@@ -52,7 +52,7 @@
                                         Browse… <input type="file" id="Image" name="Image">
                                     </span>
                                 </span>
-                                <input type="text" class="form-control" readonly>
+                                <input type="text" class="form-control" value="@Model.DisplayPicture" readonly>
                             </div>
                             <img style="max-width: 400px" id='img-upload' src="@Model.DisplayPicture" />
                         </div>
@@ -168,7 +168,7 @@
             * Tagify
             */
             $("#tagify").tagify();
-            $("#tagify").tagify('InsertJsonArrayToForm', 'PostForm', 'Tags');
+            $("#tagify").tagify('InsertJsonArrayToForm', 'PostForm');
 
         });
     </script>

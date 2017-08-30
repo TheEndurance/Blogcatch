@@ -5,7 +5,10 @@
 *       Date : August 23 / 2017
 *
 */
-(function ($) {
+(function ($, window, document, undefined) {
+    var defaults = {
+        hiddenInputName: "Tags"
+    };
     /*
     * Tagify methods
     */
@@ -13,7 +16,10 @@
         /*
         * Initialization
         */
-        Init: function () {
+        Init: function (settings) {
+            if (settings!==undefined){
+                $.extend(defaults, settings);
+            }
             var input = $(
                 '<input type="text" class="form-control" id="rj-tag-input">'
             );
@@ -24,8 +30,9 @@
         /*
         * Returns all of the tags as a JsonArray and appends the values as a hidden field in a form
         */
-        InsertJsonArrayToForm: function (formID, hiddenInputName, debugMode =false) {
-            $("#" + formID).submit(function() {
+        InsertJsonArrayToForm: function (formID, debugMode = false) {
+            $("#" + formID).submit(function () {
+                var hiddenInputName = defaults["hiddenInputName"];
                 var spanTags = $("#rj-tag-box span.tag");
                 var tagText = [];
 
@@ -55,7 +62,6 @@
     }
 
     $.fn.tagify = function (methodOrOptions) {
-
         /*
         * Method call logic
         */
@@ -63,19 +69,20 @@
             methods[methodOrOptions].apply(this, Array.prototype.slice.call(arguments, 1));
         } else if (typeof methodOrOptions === 'object' || !methodOrOptions) {
             // Default to "init"
-            methods.Init.apply(this);
+            methods.Init.apply(this,arguments);
+            /*
+            * If the hidden input exists already, and has values, initialize the tags
+            */
+            if (document.getElementById("Tags")) {
+                var tags = JSON.parse($("#Tags").val());
+                for (var i = 0; i < tags.length; i++) {
+                    CreateTag(tags[i]);
+                }
+            }
         } else {
             $.error('Method ' + methodOrOptions + ' does not exist on jQuery.tagify');
         }
-        /*
-        * If the hidden input exists already, and has values, initialize the tags
-        */
-        if (document.getElementById("Tags")){
-            var tags = JSON.parse($("#Tags").val());
-            for (var i =0;i<tags.length;i++){
-                CreateTag(tags[i]);
-            }
-        }
+        
         /*
         * When user presses space on the input, it will trigger 'CreateTag' function and send the value of the
         * input as a parameter
@@ -111,6 +118,10 @@
         $(this).on("click", "a.rj-js-tag-delete", function () {
             $(this).parents(".tag").first().remove();
         })
+
+
+        return this;
     }
 
-})(jQuery);
+
+})(jQuery, window, document, undefined);

@@ -47,5 +47,5 @@ table.sorting tr:not(.home) {
 }
 
 #img-upload{
-    width: 100%;
+    padding:1rem;
 }

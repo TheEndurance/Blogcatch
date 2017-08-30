@@ -62,15 +62,8 @@ namespace Blogcatch.Areas.Admin.Models
             {
                 throw new ArgumentNullException(nameof(userId));
             }
-            PostTags = new Collection<PostTag>();
-            this.PostDate = DateTime.Now;
-            this.AllowComments = postVM.AllowComments;
-            this.Content = postVM.Content;
             this.AuthorId = userId;
-            this.CategoryId = postVM.CategoryId;
-            SetExcerpt(postVM.Content);
-            SetSlug(postVM.Title, postVM.Slug);
-            SetDisplayPicture(postVM.Image);
+            SetPostValues(postVM);
         }
 
         public Post()
@@ -78,6 +71,22 @@ namespace Blogcatch.Areas.Admin.Models
             PostTags = new Collection<PostTag>();
         }
 
+
+        public void SetPostValues(PostViewModel postVM)
+        {
+            if (postVM == null)
+            {
+                throw new ArgumentNullException(nameof(postVM));
+            }
+            PostTags = new Collection<PostTag>();
+            this.PostDate = DateTime.Now;
+            this.AllowComments = postVM.AllowComments;
+            this.Content = postVM.Content;
+            this.CategoryId = postVM.CategoryId;
+            SetExcerpt(postVM.Content);
+            SetSlug(postVM.Title, postVM.Slug);
+            SetDisplayPicture(postVM.Image);
+        }
         /// <summary>
         /// Creates the blog post excerpt by truncating the content length
         /// </summary>

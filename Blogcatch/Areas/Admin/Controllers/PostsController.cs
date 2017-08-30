@@ -52,16 +52,20 @@ namespace Blogcatch.Areas.Admin.Controllers
         public ActionResult AddPost(PostViewModel postVM)
         {
             var userId = User.Identity.GetUserId();
+            var categories = _context.Categories.ToList();
             if (!ModelState.IsValid)
             {
+                postVM.Categories = categories;
                 return View("PostForm", postVM);
             }
             //create new post
             var post = new Post(postVM,userId);
 
-            if (_context.Posts.Any(p => p.Title == postVM.Title || p.Slug == post.Slug))
+            if (_context.Posts.Where(p=>p.Id!=post.Id).Any(p => p.Title == postVM.Title || p.Slug == post.Slug))
             {
                 ModelState.AddModelError("", "That title or slug already exists");
+                postVM.Categories = categories;
+                return View("PostForm", postVM);
             }
             //handling post tags
             if (postVM.Tags.Length > 0)
@@ -84,7 +88,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             _context.SaveChanges();
 
             TempData["SM"] = "Post successfully added!";
-            postVM.Categories = _context.Categories.ToList();
+            postVM.Categories = categories;
 
             return View("PostForm", postVM);
         }
@@ -106,7 +110,77 @@ namespace Blogcatch.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditPost(PostViewModel postVM)
         {
-            return View();
+            var categories = _context.Categories.ToList();
+            //check if valid model
+            if (!ModelState.IsValid)
+            {
+                postVM.Categories = categories;
+                return View("PostForm", postVM);
+            }
+
+            //find the post being edited
+            var post = _context.Posts.SingleOrDefault(x => x.Id == postVM.Id);
+            //check if it is null before going further
+            if (post == null)
+            {
+                return Content("That post can not be edited, because it no longer exists");
+            }
+            //set all the new values of the post
+            post.SetPostValues(postVM);
+
+            //check title/slug
+            if (_context.Posts.Any(p => p.Title == postVM.Title || p.Slug == post.Slug))
+            {
+                ModelState.AddModelError("", "That title or slug already exists");
+                postVM.Categories = categories;
+                return View("PostForm", postVM);
+            }
+
+            //Handle Add/Remove of the Post Tags
+            var postTagNames = _context.PostTags.Include(x=>x.Tag).Where(p => p.PostId == post.Id).Select(x=>x.Tag.Name).ToList();
+            
+            if (postVM.Tags.Length > 0) //If there are any tags in the view model
+            {
+                //Deserialize JSON array to a list of strings
+                var tags = JsonConvert.DeserializeObject<List<string>>(postVM.Tags);
+
+                foreach (string tagName in tags)
+                {
+                    var tag = _context.Tags.SingleOrDefault(x => x.Name == tagName);
+                    if (tag == null) //check if the tag doesn't exist
+                    {
+                        tag = new Tag(tagName);
+                        _context.Tags.Add(tag);
+                    }
+                    //Add the post tag
+                    //Check if that Tag is already attached to the post before adding it
+                    if (!_context.PostTags.Include(x => x.Tag).Any(x => x.Post.Id == post.Id && x.Tag.Name == tagName))
+                    {
+                        post.AttachTag(tag);
+                    }
+                    //Remove the post tag
+                    //Check if the current tagName has been removed from the post
+                    if (!postTagNames.Contains(tagName))
+                    {
+                        var removedPostTag = _context.PostTags.Include(x => x.Tag).Where(p => p.Tag.Name == tagName).Single();
+                        _context.PostTags.Remove(removedPostTag);
+                    }
+                }
+            } else //there are no tags on the view model
+            {
+                //check to see if there are any tags on the post, and delete them if there are
+                var postTags = _context.PostTags.Where(p => p.PostId == post.Id).ToList();
+                foreach (var item in postTags)
+                {
+                    _context.PostTags.Remove(item);
+                }
+            }
+
+            _context.SaveChanges();
+            TempData["SM"] = "Post successfully edited!";
+            postVM.Categories = _context.Categories.ToList();
+
+            return View("PostForm",postVM);
         }
     }
 }
