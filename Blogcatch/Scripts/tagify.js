@@ -74,9 +74,12 @@
             * If the hidden input exists already, and has values, initialize the tags
             */
             if (document.getElementById("Tags")) {
-                var tags = JSON.parse($("#Tags").val());
-                for (var i = 0; i < tags.length; i++) {
-                    CreateTag(tags[i]);
+                var tags = ($("#Tags").val());
+                if (tags.length>0){
+                    var jsonTags = JSON.parse(tags);
+                    for (var i = 0; i < jsonTags.length; i++) {
+                        CreateTag(jsonTags[i]);
+                    }
                 }
             }
         } else {

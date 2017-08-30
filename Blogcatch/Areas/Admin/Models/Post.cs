@@ -64,7 +64,13 @@ namespace Blogcatch.Areas.Admin.Models
             }
             PostTags = new Collection<PostTag>();
             this.AuthorId = userId;
-            UpdatePostValues(postVM);
+            this.PostDate = DateTime.Now;
+            this.AllowComments = postVM.AllowComments;
+            this.Content = postVM.Content;
+            this.CategoryId = postVM.CategoryId;
+            SetExcerpt(postVM.Content);
+            SetSlug(postVM.Title, postVM.Slug);
+            SetDisplayPicture(postVM.Image);
         }
 
         public Post()
@@ -75,7 +81,7 @@ namespace Blogcatch.Areas.Admin.Models
 
         public void UpdatePostValues(PostViewModel postVM)
         {
-            this.PostDate = DateTime.Now;
+            this.PostModifiedDate = DateTime.Now;
             this.AllowComments = postVM.AllowComments;
             this.Content = postVM.Content;
             this.CategoryId = postVM.CategoryId;
@@ -110,6 +116,7 @@ namespace Blogcatch.Areas.Admin.Models
             slug = (string.IsNullOrWhiteSpace(postSlug))
                 ? postTitle.Replace(" ", "-")
                 : postSlug.Replace(" ", "-");
+            this.Slug = slug;
 
         }
 

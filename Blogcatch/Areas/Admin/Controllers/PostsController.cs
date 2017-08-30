@@ -61,7 +61,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             //create new post
             var post = new Post(postVM,userId);
 
-            if (_context.Posts.Where(p=>p.Id!=post.Id).Any(p => p.Title == postVM.Title || p.Slug == post.Slug))
+            if (_context.Posts.Any(p => p.Title == postVM.Title || p.Slug == post.Slug))
             {
                 ModelState.AddModelError("", "That title or slug already exists");
                 postVM.Categories = categories;
@@ -88,6 +88,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             _context.SaveChanges();
 
             TempData["SM"] = "Post successfully added!";
+            postVM = new PostViewModel(post);
             postVM.Categories = categories;
 
             return View("PostForm", postVM);
