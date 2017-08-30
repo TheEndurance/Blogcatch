@@ -62,8 +62,9 @@ namespace Blogcatch.Areas.Admin.Models
             {
                 throw new ArgumentNullException(nameof(userId));
             }
+            PostTags = new Collection<PostTag>();
             this.AuthorId = userId;
-            SetPostValues(postVM);
+            UpdatePostValues(postVM);
         }
 
         public Post()
@@ -72,13 +73,8 @@ namespace Blogcatch.Areas.Admin.Models
         }
 
 
-        public void SetPostValues(PostViewModel postVM)
+        public void UpdatePostValues(PostViewModel postVM)
         {
-            if (postVM == null)
-            {
-                throw new ArgumentNullException(nameof(postVM));
-            }
-            PostTags = new Collection<PostTag>();
             this.PostDate = DateTime.Now;
             this.AllowComments = postVM.AllowComments;
             this.Content = postVM.Content;
@@ -138,6 +134,11 @@ namespace Blogcatch.Areas.Admin.Models
         {
             var postTag = new PostTag(this, tag);
             PostTags.Add(postTag);
+        }
+
+        public void RemoveTag(PostTag postTag)
+        {
+            PostTags.Remove(postTag);
         }
 
         /// <summary>
