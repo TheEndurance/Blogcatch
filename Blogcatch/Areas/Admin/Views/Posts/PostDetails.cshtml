@@ -1,0 +1,109 @@
+﻿@model Blogcatch.ViewModel.PostViewModel
+
+@{
+    ViewBag.Title = "Post Details";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/Content/styles/tagify.css" />
+}
+<h2>Post Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slug)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slug)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayPicture)
+        </dt>
+
+        <dd class="row">
+            <div class="col-md-6 col-sm-6">
+                <img class="img-responsive" src="@Model.DisplayPicture"/>
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Excerpt)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Excerpt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AllowComments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AllowComments)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+
+        <dd>
+            <input id="Tags" name="Tags" type="hidden" value="@Model.Tags" />
+            <div id="tagify"></div>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditPost", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@section scripts{
+    <script src="~/Scripts/tagify.js"></script>
+    <script>
+        $("#tagify").tagify({
+            allowInput: false
+        });
+    </script>
+}

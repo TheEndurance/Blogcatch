@@ -3,6 +3,7 @@ using Blogcatch.Areas.Admin.Models;
 using Blogcatch.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web;
@@ -34,6 +35,7 @@ namespace Blogcatch.ViewModel
         [StringLength(100)]
         public string Slug { get; set; }
 
+        [Display(Name="Display picture")]
         public string DisplayPicture { get; set; }
 
         public HttpPostedFileBase Image { get; set; }
@@ -50,6 +52,8 @@ namespace Blogcatch.ViewModel
         public string Tags { get; set; }
 
         public IEnumerable<Category> Categories { get; set; }
+
+        public Category Category { get; set; }
 
 
 
@@ -86,6 +90,7 @@ namespace Blogcatch.ViewModel
             this.Title = post.Title;
             this.Tags = post.GetJsonPostTags();
             this.CategoryId = post.CategoryId;
+            this.Category = post.Category;
             this.Slug = post.Slug;
             this.Excerpt = post.Excerpt;
             this.AllowComments = post.AllowComments;

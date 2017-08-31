@@ -651,6 +651,7 @@
     <Content Include="Content\styles\font-awesome\scss\_spinning.scss" />
     <Content Include="Content\styles\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\styles\font-awesome\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\Posts\PostDetails.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor_basic.js" />

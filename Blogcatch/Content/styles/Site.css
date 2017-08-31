@@ -49,3 +49,8 @@ table.sorting tr:not(.home) {
 #img-upload{
     padding:1rem;
 }
+
+/* Admin area */
+.admin-body-section {
+    padding: 2.5rem;
+}

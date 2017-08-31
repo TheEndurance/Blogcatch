@@ -206,6 +206,19 @@ namespace Blogcatch.Areas.Admin.Controllers
             _context.SaveChanges();
             return Json(new {success = true});
         }
+
+        // GET : /Admin/Posts/PostDetails/id
+        [HttpGet]
+        public ActionResult PostDetails(int id)
+        {
+            var post = _context.Posts.Include(x=>x.Category).Include(x=>x.PostTags.Select(p=>p.Tag)).SingleOrDefault(x=>x.Id==id);
+            if (post == null)
+            {
+                return Content("That post no longer exists");
+            }
+            var postVM = new PostViewModel(post);
+            return View(postVM);
+        }
     }
 
     

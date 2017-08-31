@@ -6,8 +6,6 @@
 @section Styles {
     <link rel="stylesheet" href="~/Content/styles/tagify.css" />
 }
-<div class="container">
-
     <h2>@((Model.Id==0)? "Add Post" : "Edit Post")</h2>
     @if (TempData["SM"] != null)
     {
@@ -113,7 +111,6 @@
     <div class="row">
         @Html.ActionLink("Back to Posts", "Index")
     </div>
-</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/tagify.js"></script>
