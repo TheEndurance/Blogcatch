@@ -14,6 +14,7 @@ namespace Blogcatch.Models
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<PostTag> PostTags { get; set; }
+        public DbSet<Widget> Widgets { get; set; }
 
 
         public ApplicationDbContext()

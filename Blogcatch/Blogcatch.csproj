@@ -221,6 +221,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WidgetsController.cs" />
     <Compile Include="Areas\Admin\Models\Category.cs" />
     <Compile Include="Areas\Admin\Models\dto\CategoryDto.cs" />
     <Compile Include="Areas\Admin\Models\dto\PageDto.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Areas\Admin\Models\PostTag.cs" />
     <Compile Include="Areas\Admin\Models\Sidebar.cs" />
     <Compile Include="Areas\Admin\Models\Tag.cs" />
+    <Compile Include="Areas\Admin\Models\Widget.cs" />
     <Compile Include="AutoMapper\WebApiMapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -279,6 +281,10 @@
     <Compile Include="Migrations\201708311931417_CreateSidebar.cs" />
     <Compile Include="Migrations\201708311931417_CreateSidebar.Designer.cs">
       <DependentUpon>201708311931417_CreateSidebar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708311956588_Widget.cs" />
+    <Compile Include="Migrations\201708311956588_Widget.Designer.cs">
+      <DependentUpon>201708311956588_Widget.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1052,6 +1058,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
+    <Folder Include="Areas\Admin\Views\Widgets\" />
     <Folder Include="fileman\aspnet_client\system_web\2_0_50727\" />
     <Folder Include="fileman\aspnet_client\system_web\4_0_30319\" />
     <Folder Include="fileman\tmp\" />
@@ -1102,6 +1109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708311931417_CreateSidebar.resx">
       <DependentUpon>201708311931417_CreateSidebar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708311956588_Widget.resx">
+      <DependentUpon>201708311956588_Widget.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
