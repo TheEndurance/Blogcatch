@@ -17,6 +17,8 @@ table.sorting tr:not(.home) {
 
 .ui-state-highlight {
     border:2px dashed #CCC;
+    list-style-type: none;
+    min-height: 4rem;
 }
 
 .ajax-text {
@@ -53,4 +55,12 @@ table.sorting tr:not(.home) {
 /* Admin area */
 .admin-body-section {
     padding: 2.5rem;
+}
+
+/* Widget admin area */
+.connectWidgets {
+    min-height: 4rem;
+}
+.connectWidgets > li {
+    cursor: pointer;
 }

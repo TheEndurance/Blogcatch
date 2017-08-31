@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Blogcatch.ViewModel.WidgetViewModel>
+
+@{
+    ViewBag.Title = "Widgets";
+}
+
+<h2>Widgets</h2>
+
+<section id="widget-body">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Available Widgets</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <ul id="enabled-widget" class="list-group connectWidgets">
+                        @foreach (var item in Model)
+                        {
+                            if (item.Enabled)
+                            {
+                                <li class="list-group-item ui-state-default">
+                                    @item.Type
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="col-md-6">
+            <h2>Active Widgets</h2>
+            <ul id="disabled-widget" class="list-group connectWidgets">
+                @foreach (var item in Model)
+                {
+                    if (!item.Enabled)
+                    {
+                        <li class="list-group-item ui-state-default">
+                            @item.Type
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $("#enabled-widget, #disabled-widget").sortable({
+                placeholder: "ui-state-highlight",
+                connectWith: ".connectWidgets"
+            });
+        });
+            
+    </script>
+}

@@ -291,17 +291,18 @@
       <DependentUpon>201708312016312_InsertSqlIntoWidget.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\BlogPostViewModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Migrations\Models\AccountViewModels.cs" />
+    <Compile Include="Migrations\Models\ApplicationDbContext.cs" />
+    <Compile Include="Migrations\Models\BlogPostViewModel.cs" />
+    <Compile Include="Migrations\Models\IdentityModels.cs" />
+    <Compile Include="Migrations\Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\CategoryViewModel.cs" />
     <Compile Include="ViewModel\PageViewModel.cs" />
     <Compile Include="ViewModel\PostViewModel.cs" />
     <Compile Include="ViewModel\SidebarViewModel.cs" />
+    <Compile Include="ViewModel\WidgetViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\home-bg.jpg" />
@@ -666,6 +667,7 @@
     <Content Include="Content\styles\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\styles\font-awesome\scss\_variables.scss" />
     <Content Include="Areas\Admin\Views\Posts\PostDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Widgets\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor_basic.js" />
@@ -1062,7 +1064,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
-    <Folder Include="Areas\Admin\Views\Widgets\" />
     <Folder Include="fileman\aspnet_client\system_web\2_0_50727\" />
     <Folder Include="fileman\aspnet_client\system_web\4_0_30319\" />
     <Folder Include="fileman\tmp\" />
