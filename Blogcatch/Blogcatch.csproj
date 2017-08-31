@@ -276,6 +276,10 @@
     <Compile Include="Migrations\201708262339269_AddForeignKeyCategoryId.Designer.cs">
       <DependentUpon>201708262339269_AddForeignKeyCategoryId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708311931417_CreateSidebar.cs" />
+    <Compile Include="Migrations\201708311931417_CreateSidebar.Designer.cs">
+      <DependentUpon>201708311931417_CreateSidebar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -1095,6 +1099,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708262339269_AddForeignKeyCategoryId.resx">
       <DependentUpon>201708262339269_AddForeignKeyCategoryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708311931417_CreateSidebar.resx">
+      <DependentUpon>201708311931417_CreateSidebar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
