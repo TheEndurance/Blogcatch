@@ -29,29 +29,49 @@
         <th>Modify</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostModifiedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Slug)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AllowComments)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditPost", new { id=item.Id }) |
-            @Html.ActionLink("Details", "PostDetails", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "DeletePost", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr id="@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.PostDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slug)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllowComments)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditPost", new { id=item.Id }) |
+                @Html.ActionLink("Details", "PostDetails", new { id=item.Id }) |
+                <a class="btn btn-link js-delete-post" data-post-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
 
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $("a.js-delete-post").click(function() {
+                var id = $(this).attr("data-post-id");
+                if (confirm("Are you sure you want to delete this post?")) {
+                    $.ajax({
+                        url: "/admin/posts/DeletePost/" + id,
+                        method: "DELETE"
+                    }).done(function() {
+                        $("tr#" + id).fadeOut();
+                    }).fail(function() {
+                        alert("An error occured, post can not be deleted!");
+                    });
+                }
+            });
+        })
+    </script>
+}

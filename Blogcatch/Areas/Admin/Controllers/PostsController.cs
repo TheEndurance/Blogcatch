@@ -192,5 +192,21 @@ namespace Blogcatch.Areas.Admin.Controllers
 
             return View("PostForm",postVM);
         }
+
+        // DELETE : /Admin/Posts/DeletePost/id
+        [HttpDelete]
+        public ActionResult DeletePost(int id)
+        {
+            var post = _context.Posts.Find(id);
+            if (post == null)
+            {
+                return Json(new {success = false});
+            }
+            _context.Posts.Remove(post);
+            _context.SaveChanges();
+            return Json(new {success = true});
+        }
     }
+
+    
 }
