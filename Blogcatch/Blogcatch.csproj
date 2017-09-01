@@ -290,6 +290,14 @@
     <Compile Include="Migrations\201708312016312_InsertSqlIntoWidget.Designer.cs">
       <DependentUpon>201708312016312_InsertSqlIntoWidget.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709011358426_WidgetDescription.cs" />
+    <Compile Include="Migrations\201709011358426_WidgetDescription.Designer.cs">
+      <DependentUpon>201709011358426_WidgetDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709011359177_SeedWidgetDescriptions.cs" />
+    <Compile Include="Migrations\201709011359177_SeedWidgetDescriptions.Designer.cs">
+      <DependentUpon>201709011359177_SeedWidgetDescriptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Models\AccountViewModels.cs" />
     <Compile Include="Migrations\Models\ApplicationDbContext.cs" />
@@ -1120,6 +1128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708312016312_InsertSqlIntoWidget.resx">
       <DependentUpon>201708312016312_InsertSqlIntoWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709011358426_WidgetDescription.resx">
+      <DependentUpon>201709011358426_WidgetDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709011359177_SeedWidgetDescriptions.resx">
+      <DependentUpon>201709011359177_SeedWidgetDescriptions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

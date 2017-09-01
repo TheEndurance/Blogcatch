@@ -18,7 +18,7 @@ table.sorting tr:not(.home) {
 .ui-state-highlight {
     border:2px dashed #CCC;
     list-style-type: none;
-    min-height: 4rem;
+    min-height: 8rem;
 }
 
 .ajax-text {

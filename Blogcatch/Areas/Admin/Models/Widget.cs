@@ -19,5 +19,9 @@ namespace Blogcatch.Areas.Admin.Models
         [Required]
         [StringLength(255)]
         public string Type { get; set; }
+
+
+        [StringLength(500)]
+        public string Description { get; set; }
     }
 }

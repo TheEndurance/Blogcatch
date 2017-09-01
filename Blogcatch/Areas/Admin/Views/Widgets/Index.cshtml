@@ -19,7 +19,8 @@
                             if (!item.Enabled)
                             {
                                 <li id="id_@item.Id" class="list-group-item ui-state-default">
-                                    @item.Type
+                                    <h4 class="list-group-item-heading">@item.Type</h4>
+                                    <p class="list-group-item-text">@item.Description</p>
                                 </li>
                             }
                         }
@@ -40,7 +41,8 @@
                             if (item.Enabled)
                             {
                                 <li id="id_@item.Id" class="list-group-item ui-state-default">
-                                    @item.Type
+                                    <h4 class="list-group-item-heading">@item.Type</h4>
+                                    <p class="list-group-item-text">@item.Description</p>
                                 </li>
                             }
                         }
@@ -54,20 +56,20 @@
 @section scripts {
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
-        $(function () {
+        $(function() {
             $("#enabled-widget, #disabled-widget").sortable({
                 placeholder: "ui-state-highlight",
                 connectWith: ".connectWidgets",
                 update: function() {
                     var ids = $("#enabled-widget").sortable("serialize");
-                    var url = "/admin/widgets/ReorderAndEnableWidgets";
-                    $.post(url, ids, function () { });
-                    alert(ids);
+                    var url = "@Url.Action("ReorderAndEnableWidgets","Widgets")";
+                    $.post(url,ids,function() { });
                 }
+
             });
         });
 
-        
+
 
     </script>
 }

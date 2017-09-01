@@ -44,9 +44,9 @@ namespace Blogcatch.Areas.Admin.Controllers
             short count = 0;
             if (id != null)
             {
-                foreach (var _id in id)
+                foreach (var widgetId in id)
                 {
-                    var widget = _context.Widgets.Find(_id);
+                    var widget = _context.Widgets.Find(widgetId);
                     widget.Sorting = count;
                     widget.Enabled = true;
                     count++;
