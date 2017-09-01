@@ -10,14 +10,15 @@
     <div class="row">
         <div class="col-md-6">
             <h2>Available Widgets</h2>
+            <hr />
             <div class="row">
                 <div class="col-md-8">
-                    <ul id="enabled-widget" class="list-group connectWidgets">
+                    <ul id="disabled-widget" class="list-group connectWidgets">
                         @foreach (var item in Model)
                         {
-                            if (item.Enabled)
+                            if (!item.Enabled)
                             {
-                                <li class="list-group-item ui-state-default">
+                                <li id="id_@item.Id" class="list-group-item ui-state-default">
                                     @item.Type
                                 </li>
                             }
@@ -26,21 +27,26 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
         <div class="col-md-6">
             <h2>Active Widgets</h2>
-            <ul id="disabled-widget" class="list-group connectWidgets">
-                @foreach (var item in Model)
-                {
-                    if (!item.Enabled)
-                    {
-                        <li class="list-group-item ui-state-default">
-                            @item.Type
-                        </li>
-                    }
-                }
-            </ul>
+            <hr />
+            <div class="row">
+                <div class="col-md-8">
+                    <ul id="enabled-widget" class="list-group connectWidgets">
+                        @foreach (var item in Model)
+                        {
+                            if (item.Enabled)
+                            {
+                                <li id="id_@item.Id" class="list-group-item ui-state-default">
+                                    @item.Type
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -48,12 +54,20 @@
 @section scripts {
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
-        $(function() {
+        $(function () {
             $("#enabled-widget, #disabled-widget").sortable({
                 placeholder: "ui-state-highlight",
-                connectWith: ".connectWidgets"
+                connectWith: ".connectWidgets",
+                update: function() {
+                    var ids = $("#enabled-widget").sortable("serialize");
+                    var url = "/admin/widgets/ReorderAndEnableWidgets";
+                    $.post(url, ids, function () { });
+                    alert(ids);
+                }
             });
         });
-            
+
+        
+
     </script>
 }

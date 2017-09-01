@@ -59,6 +59,7 @@ table.sorting tr:not(.home) {
 
 /* Widget admin area */
 .connectWidgets {
+    border: 1px solid black;
     min-height: 4rem;
 }
 .connectWidgets > li {
