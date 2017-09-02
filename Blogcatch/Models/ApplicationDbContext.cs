@@ -1,6 +1,6 @@
-﻿using Blogcatch.Areas.Admin.Models;
+﻿using System.Data.Entity;
+using Blogcatch.Areas.Admin.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
 
 namespace Blogcatch.Models
 {

@@ -1,6 +1,5 @@
 ﻿using Blogcatch.Areas.Admin.Controllers;
 using Blogcatch.Areas.Admin.Models;
-using Blogcatch.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using Blogcatch.Models;
 
 namespace Blogcatch.ViewModel
 {

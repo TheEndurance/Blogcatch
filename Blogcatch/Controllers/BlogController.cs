@@ -1,7 +1,8 @@
-﻿using Blogcatch.Models;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Blogcatch.Models;
+using Blogcatch.ViewModel;
 
 namespace Blogcatch.Controllers
 {
@@ -30,7 +31,16 @@ namespace Blogcatch.Controllers
                 .ToArray()
                 .Select(x => new BlogPostViewModel(x))
                 .ToList();
-            return View(blogPostVM);
+
+            var activeWidgets = _context.Widgets.Where(x=>x.Enabled).Select(x=>x.Type).ToList();
+
+            var blogVM = new BlogViewModel
+            {
+                BlogPostViewModels = blogPostVM,
+                ActiveWidgets = activeWidgets
+            };
+            
+            return View(blogVM);
         }
     }
 }

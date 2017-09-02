@@ -1,8 +1,8 @@
 ﻿using Blogcatch.Areas.Admin.Models;
-using Blogcatch.Models;
 using Blogcatch.ViewModel;
 using System.Linq;
 using System.Web.Mvc;
+using Blogcatch.Models;
 
 namespace Blogcatch.Areas.Admin.Controllers
 {

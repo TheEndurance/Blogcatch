@@ -2,10 +2,10 @@
 using Blogcatch.Areas.Admin.Models;
 using Blogcatch.Areas.Admin.Models.dto;
 using Blogcatch.AutoMapper;
-using Blogcatch.Models;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Routing;
+using Blogcatch.Models;
 
 namespace Blogcatch.Areas.Admin.Controllers.api
 {
@@ -40,7 +40,7 @@ namespace Blogcatch.Areas.Admin.Controllers.api
 
             if (_context.Categories.Any(c => c.Name == category.Name))
             {
-                return BadRequest("titleTaken");
+                return Ok("titleTaken");
             }
 
             _context.Categories.Add(category);

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blogcatch.Models.BlogPostViewModel>
+﻿@model Blogcatch.ViewModel.BlogViewModel
 
 @{
     ViewBag.Title = "Home";
@@ -21,13 +21,13 @@
 </header>
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 post-area">
             <!-- Main page heading -->
             <h1 class="page-header">
                 Blogcatch
                 <small>Blogging CMS</small>
             </h1>
-            @foreach (var post in Model)
+            @foreach (var post in Model.BlogPostViewModels)
             {
                 <!-- Blog post -->
                 <h2>
@@ -51,6 +51,15 @@
                 <hr>
             }
 
+        </div>
+        <div class="col-md-4 well widget-area">
+            @foreach (var widget in Model.ActiveWidgets)
+            {
+                
+                {
+                    Html.RenderAction(widget,"Widgets",new {area=""});
+                }
+            }
         </div>
     </div>
 </div>

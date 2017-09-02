@@ -1,8 +1,9 @@
-﻿using Blogcatch.Areas.Admin.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Blogcatch.Areas.Admin.Models;
+using Blogcatch.Models;
 
-namespace Blogcatch.Models
+namespace Blogcatch.ViewModel
 {
     public class BlogPostViewModel
     {
@@ -38,6 +39,8 @@ namespace Blogcatch.Models
         public ICollection<PostTag> PostTags { get; set; }
 
         public Category Category { get; set; }
+
+        public List<string> ActiveWidgets { get; set; }
 
     }
 }

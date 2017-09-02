@@ -1,5 +1,4 @@
 ﻿using Blogcatch.Areas.Admin.Models;
-using Blogcatch.Models;
 using Blogcatch.ViewModel;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
@@ -9,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
+using Blogcatch.Models;
 
 namespace Blogcatch.Areas.Admin.Controllers
 {

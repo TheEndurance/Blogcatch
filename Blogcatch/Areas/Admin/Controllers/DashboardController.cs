@@ -1,5 +1,5 @@
-﻿using Blogcatch.Models;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Blogcatch.Models;
 
 namespace Blogcatch.Areas.Admin.Controllers
 {
