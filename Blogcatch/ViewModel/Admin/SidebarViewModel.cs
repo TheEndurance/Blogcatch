@@ -1,7 +1,7 @@
-﻿using Blogcatch.Areas.Admin.Models;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Blogcatch.Areas.Admin.Models;
 
-namespace Blogcatch.ViewModel
+namespace Blogcatch.ViewModel.Admin
 {
     public class SidebarViewModel
     {

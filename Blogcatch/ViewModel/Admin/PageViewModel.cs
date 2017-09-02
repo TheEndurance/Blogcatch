@@ -1,11 +1,11 @@
-﻿using Blogcatch.Areas.Admin.Controllers;
-using Blogcatch.Areas.Admin.Models;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using Blogcatch.Areas.Admin.Controllers;
+using Blogcatch.Areas.Admin.Models;
 
-namespace Blogcatch.ViewModel
+namespace Blogcatch.ViewModel.Admin
 {
     public class PageViewModel
     {

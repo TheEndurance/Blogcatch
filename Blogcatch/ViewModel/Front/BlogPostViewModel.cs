@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Blogcatch.Areas.Admin.Models;
 using Blogcatch.Models;
 
-namespace Blogcatch.ViewModel
+namespace Blogcatch.ViewModel.Front
 {
     public class BlogPostViewModel
     {

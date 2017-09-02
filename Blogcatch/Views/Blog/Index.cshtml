@@ -1,4 +1,4 @@
-﻿@model Blogcatch.ViewModel.BlogViewModel
+﻿@model Blogcatch.ViewModel.Front.BlogViewModel
 
 @{
     ViewBag.Title = "Home";
@@ -52,13 +52,14 @@
             }
 
         </div>
-        <div class="col-md-4 well widget-area">
+        <div class="col-md-4 widget-area">
             @foreach (var widget in Model.ActiveWidgets)
             {
-                
-                {
+                <div class="well">
+                    @{
                     Html.RenderAction(widget,"Widgets",new {area=""});
-                }
+                    }
+                </div>
             }
         </div>
     </div>

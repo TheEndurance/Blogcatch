@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using Blogcatch.Models;
+using Blogcatch.ViewModel.Admin;
 
 namespace Blogcatch.Areas.Admin.Models
 {

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Blogcatch.Models;
 using Blogcatch.ViewModel;
+using Blogcatch.ViewModel.Front;
 
 namespace Blogcatch.Controllers
 {

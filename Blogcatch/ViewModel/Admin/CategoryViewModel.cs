@@ -1,7 +1,7 @@
-﻿using Blogcatch.Areas.Admin.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Blogcatch.Areas.Admin.Models;
 
-namespace Blogcatch.ViewModel
+namespace Blogcatch.ViewModel.Admin
 {
     public class CategoryViewModel
     {

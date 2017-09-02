@@ -1,0 +1,19 @@
+﻿@model Blogcatch.ViewModel.Front.CategoriesWidgetViewModel
+<div class="row">
+    <div class="col-md-6">
+        <ul class="list-unstyled">
+            @foreach (string category in Model.FirstCategoriesList)
+            {
+                <li>@category</li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <ul class="list-unstyled">
+            @foreach (string category in Model.SecondCategoriesList)
+            {
+                <li>@category</li>
+            }
+        </ul>
+    </div>
+</div>

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using Blogcatch.Areas.Admin.Models;
+﻿using Blogcatch.Areas.Admin.Models;
 
-namespace Blogcatch.ViewModel
+namespace Blogcatch.ViewModel.Admin
 {
     public class WidgetViewModel
     {

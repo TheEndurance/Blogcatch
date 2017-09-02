@@ -1,5 +1,6 @@
 ﻿using Blogcatch.ViewModel;
 using System.ComponentModel.DataAnnotations;
+using Blogcatch.ViewModel.Admin;
 
 namespace Blogcatch.Areas.Admin.Models
 {
