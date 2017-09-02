@@ -1,10 +1,10 @@
 ﻿@model Blogcatch.ViewModel.Front.SearchWidgetViewModel
 
-@using (Html.BeginForm("Search", "Blog", FormMethod.Post))
+@using (Html.BeginForm("Search", "Blog",FormMethod.Get))
 {
     <div class="form-group">
-        <label for="query">@Model.Type</label>
+        <h4>Blog @Model.Type</h4>
         <input type="text" class="form-control" id="query" name="query" placeholder="Search for a blog...">
     </div>
-        <button type="button" class="btn btn-success btn-sm">Search</button>
+    <button type="submit" class="btn btn-success btn-sm">Search</button>
 }

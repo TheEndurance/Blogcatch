@@ -43,5 +43,16 @@ namespace Blogcatch.Controllers
             
             return View(blogVM);
         }
+
+
+        public ActionResult Search(string query)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ActionResult SearchByCategory(string query)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -56,5 +56,6 @@ namespace Blogcatch.Areas.Admin.Controllers
             _context.SaveChanges();
             return Json(new {success = true});
         }
+
     }
 }

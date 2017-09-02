@@ -1,10 +1,13 @@
 ﻿@model Blogcatch.ViewModel.Front.CategoriesWidgetViewModel
+
+<h4>Blog @Model.Type</h4>
 <div class="row">
     <div class="col-md-6">
         <ul class="list-unstyled">
             @foreach (string category in Model.FirstCategoriesList)
             {
-                <li>@category</li>
+                
+                <li>@Html.ActionLink(category, "SearchByCategory", "Blog", new {query = category},null)</li>
             }
         </ul>
     </div>
@@ -12,7 +15,7 @@
         <ul class="list-unstyled">
             @foreach (string category in Model.SecondCategoriesList)
             {
-                <li>@category</li>
+                <li>@Html.ActionLink(category, "SearchByCategory", "Blog", new { query = category },null)</li>
             }
         </ul>
     </div>

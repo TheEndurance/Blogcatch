@@ -67,3 +67,6 @@ table.sorting tr:not(.home) {
 }
 
 /* Blog front-end main page */
+.category-content {
+    padding: 1rem;
+}

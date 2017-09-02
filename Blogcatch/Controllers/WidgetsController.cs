@@ -47,7 +47,7 @@ namespace Blogcatch.Controllers
             categoriesWidgetVM.FirstCategoriesList = firstCategoryList;
             categoriesWidgetVM.SecondCategoriesList = secondCategoryList;
 
-            return View("_Categories",categoriesWidgetVM);
+            return PartialView("_Categories",categoriesWidgetVM);
         }
 
     }
