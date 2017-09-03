@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Blogcatch.Models;
 
 namespace Blogcatch.ViewModel.Front
 {
@@ -6,5 +7,6 @@ namespace Blogcatch.ViewModel.Front
     {
         public IEnumerable<BlogPostViewModel> BlogPostViewModels { get; set; }
         public List<string> ActiveWidgets { get; set; }
+        public Pager Pager { get; set; }
     }
 }

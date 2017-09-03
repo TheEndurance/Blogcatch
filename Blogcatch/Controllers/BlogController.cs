@@ -22,23 +22,26 @@ namespace Blogcatch.Controllers
             _context.Dispose();
         }
         // GET: Blog
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            //get the blogposts
             var blogPostVM = _context.Posts
                 .Include(x => x.Author)
                 .Include(x => x.PostTags.Select(p => p.Tag))
-                .OrderByDescending(x => x.PostDate)
-                .Take(5)
-                .ToArray()
-                .Select(x => new BlogPostViewModel(x))
-                .ToList();
+                .OrderByDescending(x => x.PostDate);
 
+            //create pager
+            var pager = new Pager(blogPostVM.Count(),page);
+
+            //get the active widget names
             var activeWidgets = _context.Widgets.Where(x=>x.Enabled).Select(x=>x.Type).ToList();
 
+            //create the main viewmodel
             var blogVM = new BlogViewModel
             {
-                BlogPostViewModels = blogPostVM,
-                ActiveWidgets = activeWidgets
+                BlogPostViewModels = blogPostVM.Skip((pager.CurrentPage-1)*pager.NumItemsPerPage).Take(pager.NumItemsPerPage).ToList().Select(x=>new BlogPostViewModel(x)),
+                ActiveWidgets = activeWidgets,
+                Pager = pager
             };
             
             return View(blogVM);

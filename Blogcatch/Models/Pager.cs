@@ -15,12 +15,12 @@ namespace Blogcatch.Models
         public int StartPage { get; set; }
         public int EndPage { get; set; }
 
-        public Pager(int totalItems,int? page,int numItemsPerPage = 10,int numPagers = 10)
+        public Pager(int totalItems,int? page,int numItemsPerPage = 1)
         {
             var totalPages = (int) Math.Ceiling((decimal) totalItems / (decimal) numItemsPerPage);
             var currentPage = page ?? 1; //if page is null, set the value of current page to 1
-            var startPage = currentPage - (numPagers/2); 
-            var endPage = currentPage + (numPagers/2)-1;
+            var startPage = currentPage - 5; 
+            var endPage = currentPage + 4;
 
             if (startPage <= 0)
             {
@@ -31,9 +31,9 @@ namespace Blogcatch.Models
             if (endPage > totalPages) //If the endPage is more than the number of pages
             {
                 endPage = totalPages; //set the endPage to the maximum number of pages
-                if (endPage > numPagers) //once the endpage moves past 10 pages  
+                if (endPage > 10) //once the endpage moves past 10 pages  
                 {
-                    startPage = endPage - (numPagers-1);
+                    startPage = endPage - 9;
                 }
             }
 

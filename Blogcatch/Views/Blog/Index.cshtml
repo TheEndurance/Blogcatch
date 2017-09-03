@@ -36,7 +36,7 @@
                 <p class="lead">@post.Author.UserName</p>
                 <p><i class="fa fa-clock-o fa-1" aria-hidden="true"></i> Posted on @post.PostDate</p>
                 <hr>
-                if (post.DisplayPicture!=null)
+                if (post.DisplayPicture != null)
                 {
                     <img class="img-responsive" src="@post.DisplayPicture" alt="">
                 }
@@ -51,16 +51,50 @@
                 <hr>
             }
 
+            <!-- pager -->
+            @if (Model.Pager.EndPage > 1)
+            {
+                <ul class="pagination pagination-lg">
+                    @if (Model.Pager.CurrentPage > 1)
+                    {
+                        <li>
+                            @Html.ActionLink("First","Index","Blog")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Previous","Index","Blog",new { page = Model.Pager.CurrentPage - 1},null)
+                        </li>
+                    }
+
+                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                            @Html.ActionLink(page.ToString(), "Index", "Blog", new { page = page},null)
+                        </li>
+                    }
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                        <li>
+                            @Html.ActionLink("Next", "Index", "Blog",new {page = Model.Pager.CurrentPage+1},null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Last", "Index", "Blog", new {page = Model.Pager.EndPage},null)
+                            
+                        </li>
+                    }
+                </ul>
+            }
+
         </div>
         <div class="col-md-4 widget-area">
             @foreach (var widget in Model.ActiveWidgets)
             {
                 <div class="well">
                     @{
-                    Html.RenderAction(widget,"Widgets",new {area=""});
+                        Html.RenderAction(widget, "Widgets", new { area = "" });
                     }
                 </div>
-            }
+                        }
         </div>
     </div>
 </div>
