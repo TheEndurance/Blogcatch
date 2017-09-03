@@ -235,6 +235,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NavbarController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -303,6 +304,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Pager.cs" />
+    <Compile Include="ViewModel\Front\BlogPostDetailViewModel.cs" />
     <Compile Include="ViewModel\Front\BlogPostViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -315,6 +317,8 @@
     <Compile Include="ViewModel\Admin\SidebarViewModel.cs" />
     <Compile Include="ViewModel\Admin\WidgetViewModel.cs" />
     <Compile Include="ViewModel\Front\CategoriesWidgetViewModel.cs" />
+    <Compile Include="ViewModel\Front\NavPageViewModel.cs" />
+    <Compile Include="ViewModel\Front\PageViewModel.cs" />
     <Compile Include="ViewModel\Front\SearchWidgetViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1076,6 +1080,9 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Widgets\_Search.cshtml" />
     <Content Include="Views\Widgets\_Categories.cshtml" />
+    <Content Include="Views\Blog\Post.cshtml" />
+    <Content Include="Views\Navbar\_Navbar.cshtml" />
+    <Content Include="Views\Blog\Page.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

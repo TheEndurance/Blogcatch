@@ -42,5 +42,6 @@ namespace Blogcatch.ViewModel.Front
 
         public List<string> ActiveWidgets { get; set; }
 
+
     }
 }

@@ -4,9 +4,13 @@
     ViewBag.Title = "Home";
 }
 
+@{
+    Html.RenderAction("Navbar","Navbar", new {area = ""});
+}
+
 <!-- Page Header -->
 <!-- Set your background image for this header on the line below. -->
-<header class="intro-header">
+<header class="intro-header" style='background: url("/Content/images/home-bg.jpg") no-repeat center center;'>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -46,7 +50,7 @@
                 }
                 <hr>
                 <p>@Html.Raw(post.Excerpt)</p>
-                <a class="btn btn-primary" href="/Post?title=@post.Slug">Read More <i class="fa fa-chevron-right fa-1" aria-hidden="true"></i></a><br/><br/>
+                <a class="btn btn-primary" href="/Blog/Post?title=@post.Slug">Read More <i class="fa fa-chevron-right fa-1" aria-hidden="true"></i></a><br/><br/>
 
                 <span>Category: @post.Category.Name</span><br/>
                 <span>Tags: </span>
@@ -98,10 +102,10 @@
             {
                 <div class="well">
                     @{
-                        Html.RenderAction(widget, "Widgets", new { area = "" });
+                        Html.RenderAction(widget, "Widgets", new {area = ""});
                     }
                 </div>
-                        }
+             }
         </div>
     </div>
 </div>

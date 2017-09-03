@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Blogcatch.Models;
@@ -21,6 +22,7 @@ namespace Blogcatch.Controllers
         {
             _context.Dispose();
         }
+
         // GET: Blog
         public ActionResult Index(int? page,string search,string category)
         {
@@ -49,7 +51,10 @@ namespace Blogcatch.Controllers
             //create the main viewmodel
             var blogVM = new BlogViewModel
             {
-                BlogPostViewModels = blogPostVM.Skip((pager.CurrentPage-1)*pager.NumItemsPerPage).Take(pager.NumItemsPerPage).ToList().Select(x=>new BlogPostViewModel(x)),
+                BlogPostViewModels = blogPostVM
+                    .Skip((pager.CurrentPage-1)*pager.NumItemsPerPage)
+                    .Take(pager.NumItemsPerPage).ToList()
+                    .Select(x=>new BlogPostViewModel(x)),
                 ActiveWidgets = activeWidgets,
                 Pager = pager,
                 Search = search,
@@ -59,9 +64,29 @@ namespace Blogcatch.Controllers
             return View(blogVM);
         }
 
+        // GET : /Blog/Post?title=
         public ActionResult Post(string title)
         {
-            return View();
+            var post = _context.Posts
+                .Include(x=>x.Author)
+                .SingleOrDefault(x => x.Slug == title);
+
+            if (post == null)
+                return Content("This post does not exist or has been removed");
+            
+            var blogPostDetailVM = new BlogPostDetailViewModel(post);
+
+            return View(blogPostDetailVM);
+        }
+
+        public ActionResult Page(string title)
+        {
+            var page = _context.Pages.SingleOrDefault(x => x.Slug == title);
+            if (page == null)
+                return Content("This page doesn't exist or has been removed.");
+
+            var pageVM = new PageViewModel(page);
+            return View(page);
         }
     }
 }
