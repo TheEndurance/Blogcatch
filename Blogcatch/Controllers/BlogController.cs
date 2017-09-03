@@ -59,10 +59,9 @@ namespace Blogcatch.Controllers
             return View(blogVM);
         }
 
-
-        public ActionResult SearchByCategory(string query)
+        public ActionResult Post(string title)
         {
-            throw new System.NotImplementedException();
+            return View();
         }
     }
 }

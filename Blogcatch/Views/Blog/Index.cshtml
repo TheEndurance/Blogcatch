@@ -31,7 +31,7 @@
             {
                 <!-- Blog post -->
                 <h2>
-                    <a href="#">@post.Title</a>
+                    @Html.ActionLink(post.Title.ToString(),"Post","Blog",new {title=post.Slug},null)
                 </h2>
                 <p class="lead">@post.Author.UserName</p>
                 <p><i class="fa fa-clock-o fa-1" aria-hidden="true"></i> Posted on @post.PostDate</p>
