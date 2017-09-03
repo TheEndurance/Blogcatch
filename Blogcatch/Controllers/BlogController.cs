@@ -22,16 +22,22 @@ namespace Blogcatch.Controllers
             _context.Dispose();
         }
         // GET: Blog
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page,string search,string category)
         {
             //get the blogposts
             var blogPostVM = _context.Posts
                 .Include(x => x.Author)
-                .Include(x => x.PostTags.Select(p => p.Tag))
-                .OrderByDescending(x => x.PostDate);
+                .Include(x => x.PostTags.Select(p => p.Tag));
+            //check if user is searching
+            if (!string.IsNullOrWhiteSpace(search))
+                blogPostVM = blogPostVM
+                    .Where(x => x.Content.Contains(search) || x.Title.Contains(search));
+            //order descending time
+            blogPostVM = blogPostVM.OrderByDescending(x => x.PostDate);
+
 
             //create pager
-            var pager = new Pager(blogPostVM.Count(),page);
+            var pager = new Pager(blogPostVM.Count(),page,2);
 
             //get the active widget names
             var activeWidgets = _context.Widgets.Where(x=>x.Enabled).Select(x=>x.Type).ToList();
@@ -41,17 +47,13 @@ namespace Blogcatch.Controllers
             {
                 BlogPostViewModels = blogPostVM.Skip((pager.CurrentPage-1)*pager.NumItemsPerPage).Take(pager.NumItemsPerPage).ToList().Select(x=>new BlogPostViewModel(x)),
                 ActiveWidgets = activeWidgets,
-                Pager = pager
+                Pager = pager,
+                Search = search
             };
             
             return View(blogVM);
         }
 
-
-        public ActionResult Search(string query)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public ActionResult SearchByCategory(string query)
         {

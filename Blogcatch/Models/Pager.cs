@@ -15,7 +15,7 @@ namespace Blogcatch.Models
         public int StartPage { get; set; }
         public int EndPage { get; set; }
 
-        public Pager(int totalItems,int? page,int numItemsPerPage = 1)
+        public Pager(int totalItems,int? page,int numItemsPerPage = 10)
         {
             var totalPages = (int) Math.Ceiling((decimal) totalItems / (decimal) numItemsPerPage);
             var currentPage = page ?? 1; //if page is null, set the value of current page to 1

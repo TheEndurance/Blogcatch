@@ -58,27 +58,27 @@
                     @if (Model.Pager.CurrentPage > 1)
                     {
                         <li>
-                            @Html.ActionLink("First","Index","Blog")
+                            @Html.ActionLink("First","Index","Blog",new {page = 1,search = Model.Search},null)
                         </li>
                         <li>
-                            @Html.ActionLink("Previous","Index","Blog",new { page = Model.Pager.CurrentPage - 1},null)
+                            @Html.ActionLink("Previous","Index","Blog",new { page = Model.Pager.CurrentPage - 1, search=Model.Search},null)
                         </li>
                     }
 
                     @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                     {
                         <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                            @Html.ActionLink(page.ToString(), "Index", "Blog", new { page = page},null)
+                            @Html.ActionLink(page.ToString(), "Index", "Blog", new { page = page, search = Model.Search },null)
                         </li>
                     }
 
                     @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                     {
                         <li>
-                            @Html.ActionLink("Next", "Index", "Blog",new {page = Model.Pager.CurrentPage+1},null)
+                            @Html.ActionLink("Next", "Index", "Blog",new {page = Model.Pager.CurrentPage+1, search = Model.Search },null)
                         </li>
                         <li>
-                            @Html.ActionLink("Last", "Index", "Blog", new {page = Model.Pager.EndPage},null)
+                            @Html.ActionLink("Last", "Index", "Blog", new {page = Model.Pager.EndPage, search = Model.Search },null)
                             
                         </li>
                     }
