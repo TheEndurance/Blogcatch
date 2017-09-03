@@ -7,7 +7,7 @@
             @foreach (string category in Model.FirstCategoriesList)
             {
                 
-                <li>@Html.ActionLink(category, "SearchByCategory", "Blog", new {query = category},null)</li>
+                <li>@Html.ActionLink(category, "Index", "Blog", new {category = category},null)</li>
             }
         </ul>
     </div>
@@ -15,7 +15,7 @@
         <ul class="list-unstyled">
             @foreach (string category in Model.SecondCategoriesList)
             {
-                <li>@Html.ActionLink(category, "SearchByCategory", "Blog", new { query = category },null)</li>
+                <li>@Html.ActionLink(category, "Index", "Blog", new { category = category },null)</li>
             }
         </ul>
     </div>

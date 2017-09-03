@@ -32,9 +32,12 @@ namespace Blogcatch.Controllers
             if (!string.IsNullOrWhiteSpace(search))
                 blogPostVM = blogPostVM
                     .Where(x => x.Content.Contains(search) || x.Title.Contains(search));
+            //check if user is searching by category
+            if (!string.IsNullOrWhiteSpace(category))
+                blogPostVM = blogPostVM.Where(x => x.Category.Name == category);
+
             //order descending time
             blogPostVM = blogPostVM.OrderByDescending(x => x.PostDate);
-
 
             //create pager
             var pager = new Pager(blogPostVM.Count(),page,2);
@@ -48,7 +51,8 @@ namespace Blogcatch.Controllers
                 BlogPostViewModels = blogPostVM.Skip((pager.CurrentPage-1)*pager.NumItemsPerPage).Take(pager.NumItemsPerPage).ToList().Select(x=>new BlogPostViewModel(x)),
                 ActiveWidgets = activeWidgets,
                 Pager = pager,
-                Search = search
+                Search = search,
+                Category = category
             };
             
             return View(blogVM);
