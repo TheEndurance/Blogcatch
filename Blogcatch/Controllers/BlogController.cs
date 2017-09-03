@@ -27,6 +27,7 @@ namespace Blogcatch.Controllers
             //get the blogposts
             var blogPostVM = _context.Posts
                 .Include(x => x.Author)
+                .Include(x=>x.Category)
                 .Include(x => x.PostTags.Select(p => p.Tag));
             //check if user is searching
             if (!string.IsNullOrWhiteSpace(search))

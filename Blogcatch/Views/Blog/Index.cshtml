@@ -46,7 +46,14 @@
                 }
                 <hr>
                 <p>@Html.Raw(post.Excerpt)</p>
-                <a class="btn btn-primary" href="/Post?title=@post.Slug">Read More <i class="fa fa-chevron-right fa-1" aria-hidden="true"></i></a>
+                <a class="btn btn-primary" href="/Post?title=@post.Slug">Read More <i class="fa fa-chevron-right fa-1" aria-hidden="true"></i></a><br/><br/>
+
+                <span>Category: @post.Category.Name</span><br/>
+                <span>Tags: </span>
+                foreach (var tag in post.PostTags.Select(x => x.Tag.Name))
+                {
+                    <span class="label label-primary">@tag</span>
+                }
 
                 <hr>
             }
