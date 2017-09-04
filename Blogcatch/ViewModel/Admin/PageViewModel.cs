@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 using Blogcatch.Areas.Admin.Controllers;
 using Blogcatch.Areas.Admin.Models;
@@ -25,10 +26,17 @@ namespace Blogcatch.ViewModel.Admin
         [Display(Name = "Sidebar")]
         public bool HasSidebar { get; set; }
 
+        [Display(Name="Header picture")]
+        public string HeaderPicture { get; set; }
+
+        public HttpPostedFile Image { get; set; }
+
+
         public string Heading
         {
             get { return (Id == 0) ? "Add a new page" : "Edit page"; }
         }
+ 
 
         public string Action
         {

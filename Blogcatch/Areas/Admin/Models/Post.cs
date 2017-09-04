@@ -71,7 +71,6 @@ namespace Blogcatch.Areas.Admin.Models
             this.CategoryId = postVM.CategoryId;
             SetExcerpt(postVM.Content);
             SetSlug(postVM.Title, postVM.Slug);
-            SetDisplayPicture(postVM.Image);
         }
 
         public Post()
@@ -88,7 +87,7 @@ namespace Blogcatch.Areas.Admin.Models
             this.CategoryId = postVM.CategoryId;
             SetExcerpt(postVM.Content);
             SetSlug(postVM.Title, postVM.Slug);
-            SetDisplayPicture(postVM.Image);
+            this.DisplayPicture = ImageManager.GetImageFilePath(postVM.Image);
         }
         /// <summary>
         /// Creates the blog post excerpt by truncating the content length
@@ -102,7 +101,7 @@ namespace Blogcatch.Areas.Admin.Models
                 return;
             }
             int lastSpace = input.LastIndexOf(" ", length);
-            var excerpt = $"{input.Substring(0, (lastSpace > 0) ? lastSpace : length)}" + "...";
+            var excerpt = $"{input.Substring(0, (lastSpace > 0) ? lastSpace : length)}" + ommission;
             this.Excerpt = excerpt.Trim();
         }
 
@@ -155,13 +154,9 @@ namespace Blogcatch.Areas.Admin.Models
         /// <returns></returns>
         public string GetJsonPostTags()
         {
-            List<string> tags = new List<string>();
-            foreach (var tagName in PostTags.Select(x => x.Tag.Name))
-            {
-                tags.Add(tagName);
-            }
-            var JsonTags = JsonConvert.SerializeObject(tags);
-            return JsonTags;
+            var tags = PostTags.Select(x => x.Tag.Name).ToList();
+            var jsonTags = JsonConvert.SerializeObject(tags);
+            return jsonTags;
         }
 
     }

@@ -32,6 +32,7 @@ namespace Blogcatch.Areas.Admin.Models
             this.Body = pageVM.Body;
             this.HasSidebar = pageVM.HasSidebar;
             this.Sorting = 100;
+            this.HeaderPicture = ImageManager.GetImageFilePath(pageVM.Image);
         }
 
         protected Page()
@@ -45,6 +46,7 @@ namespace Blogcatch.Areas.Admin.Models
             this.Title = pageVM.Title;
             this.Body = pageVM.Body;
             this.HasSidebar = pageVM.HasSidebar;
+            this.HeaderPicture = ImageManager.GetImageFilePath(pageVM.Image);
         }
 
 
