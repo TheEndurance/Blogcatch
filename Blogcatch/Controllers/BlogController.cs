@@ -86,7 +86,7 @@ namespace Blogcatch.Controllers
                 return Content("This page doesn't exist or has been removed.");
 
             var pageVM = new PageViewModel(page);
-            return View(page);
+            return View(pageVM);
         }
     }
 }

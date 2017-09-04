@@ -22,6 +22,9 @@ namespace Blogcatch.Areas.Admin.Models
 
         public bool HasSidebar { get; set; }
 
+        public string HeaderPicture { get; set; }
+
+
         public Page(PageViewModel pageVM)
         {
             this.Title = pageVM.Title;

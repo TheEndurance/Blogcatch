@@ -300,6 +300,10 @@
     <Compile Include="Migrations\201709011359177_SeedWidgetDescriptions.Designer.cs">
       <DependentUpon>201709011359177_SeedWidgetDescriptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709042141208_PageHeaderPicture.cs" />
+    <Compile Include="Migrations\201709042141208_PageHeaderPicture.Designer.cs">
+      <DependentUpon>201709042141208_PageHeaderPicture.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -1149,6 +1153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709011359177_SeedWidgetDescriptions.resx">
       <DependentUpon>201709011359177_SeedWidgetDescriptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709042141208_PageHeaderPicture.resx">
+      <DependentUpon>201709042141208_PageHeaderPicture.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

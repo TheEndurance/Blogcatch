@@ -3,5 +3,28 @@
     ViewBag.Title = "Page";
 }
 
-<h2>Page</h2>
+@{
+    Html.RenderAction("Navbar", "Navbar", new {area = ""});   
+}
 
+<header class="intro-header" style='background: url("/Content/images/post-bg.jpg") no-repeat center center;'>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="page-heading">
+                    <h1>@Model.Title</h1>
+                    <hr class="small"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-8  @((Model.HasSidebar)? " " : "col-lg-offset-2 col-md-offset-2")">
+            <article class="the-page">
+                @Html.Raw(Model.Body)
+            </article>
+        </div>
+    </div>
+</div>
