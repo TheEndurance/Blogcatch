@@ -14,11 +14,14 @@ namespace Blogcatch.ViewModel.Front
 
         public bool HasSidebar { get; set; }
 
+        public string HeaderPicture { get; set; }
+
         public PageViewModel(Page page)
         {
             this.Title = page.Title;
             this.Body = page.Body;
             this.HasSidebar = page.HasSidebar;
+            this.HeaderPicture = page.HeaderPicture;
         }
     }
 }
