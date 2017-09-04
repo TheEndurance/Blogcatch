@@ -25,7 +25,7 @@ namespace Blogcatch.Controllers
         // GET: Navbar
         public ActionResult Navbar()
         {
-            var navPageVM = _context.Pages.ToList().Select(x => new NavPageViewModel(x));
+            var navPageVM = _context.Pages.OrderBy(x=>x.Sorting).ToList().Select(x => new NavPageViewModel(x));
             return PartialView("_Navbar", navPageVM);
         }
     }

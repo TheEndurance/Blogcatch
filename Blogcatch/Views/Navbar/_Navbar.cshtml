@@ -19,7 +19,9 @@
                 </li>
                 @foreach (var navPage in Model)
                 {
-                    @Html.ActionLink(navPage.Title.ToString(),"Page","Blog",new {title=navPage.Slug})
+                    <li>
+                        @Html.ActionLink(navPage.Title.ToString(),"Page","Blog",new {title=navPage.Slug},null)
+                    </li>
                 }
             </ul>
             <ul class="nav navbar-nav navbar-right">
