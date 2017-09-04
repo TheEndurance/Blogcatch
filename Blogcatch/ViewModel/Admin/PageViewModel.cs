@@ -29,8 +29,7 @@ namespace Blogcatch.ViewModel.Admin
         [Display(Name="Header picture")]
         public string HeaderPicture { get; set; }
 
-        public HttpPostedFile Image { get; set; }
-
+        public HttpPostedFileBase Image { get; set; }
 
         public string Heading
         {
@@ -59,6 +58,7 @@ namespace Blogcatch.ViewModel.Admin
             this.Body = page.Body;
             this.Sorting = page.Sorting;
             this.HasSidebar = page.HasSidebar;
+            this.HeaderPicture = page.HeaderPicture;
         }
 
         public PageViewModel()

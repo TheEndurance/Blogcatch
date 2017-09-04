@@ -7,7 +7,7 @@
 <h2>@Model.Heading</h2>
 
 
-@using (Html.BeginForm(Model.Action,"Pages")) 
+@using (Html.BeginForm(Model.Action ,"Pages", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -35,7 +35,7 @@
         </div>
         
         <div class="form-group">
-            <label class="control-label col-md-2" for="Image">Blog Post Display Picture</label>
+            <label class="control-label col-md-2" for="Image">Page header picture</label>
             <div class="col-md-10">
                 <div class="input-group">
                     <span class="input-group-btn">

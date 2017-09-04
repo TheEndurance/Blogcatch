@@ -60,6 +60,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             _context.SaveChanges();
 
             TempData["SM"] = "Page was successfully added!";
+            pageVM = new PageViewModel(page);
 
             return View("PageForm", pageVM);
         }
@@ -103,7 +104,7 @@ namespace Blogcatch.Areas.Admin.Controllers
             _context.SaveChanges();
 
             TempData["SM"] = "Page was successfully edited!";
-
+            pageVM = new PageViewModel(page);
             return View("PageForm", pageVM);
         }
 

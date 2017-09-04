@@ -71,6 +71,7 @@ namespace Blogcatch.Areas.Admin.Models
             this.CategoryId = postVM.CategoryId;
             SetExcerpt(postVM.Content);
             SetSlug(postVM.Title, postVM.Slug);
+            this.DisplayPicture = ImageManager.GetImageFilePath(postVM.Image);
         }
 
         public Post()
