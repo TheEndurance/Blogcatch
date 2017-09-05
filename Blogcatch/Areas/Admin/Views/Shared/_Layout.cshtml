@@ -6,7 +6,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/styles/css/back")
     @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("Styles",required:false);
+    @RenderSection("Styles", required: false);
     <link href="~/Content/styles/sb-admin.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="~/Content/styles/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -38,6 +38,11 @@
                 <a class="navbar-brand" href="/admin/dashboard">Blogcatch Admin</a>
             </div>
             <!-- Top Menu Items -->
+            <ul class="nav navbar-left top-nav">
+                <li>
+                    @Html.ActionLink("Visit site", "Index", "Blog",new {area=""},null)
+                </li>
+            </ul>
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -162,7 +167,7 @@
                     <li>
                         <a href="/admin/Widgets"><i class="fa fa-sliders fa-1"></i> Widgets</a>
                     </li>
-            </ul>
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </nav>

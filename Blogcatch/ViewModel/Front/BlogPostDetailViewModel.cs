@@ -20,6 +20,8 @@ namespace Blogcatch.ViewModel.Front
 
         public bool AllowComments { get; set; }
 
+        public List<CommentViewModel> CommentViewModels { get; set; }
+
         public BlogPostDetailViewModel(Post post)
         {
             this.Author = post.Author;

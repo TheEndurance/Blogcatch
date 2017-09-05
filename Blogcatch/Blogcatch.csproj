@@ -236,6 +236,7 @@
     <Compile Include="AutoMapper\WebApiMapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
@@ -313,6 +314,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Dto\CommentDto.cs" />
     <Compile Include="Models\Pager.cs" />
     <Compile Include="ViewModel\Front\BlogPostDetailViewModel.cs" />
     <Compile Include="ViewModel\Front\BlogPostViewModel.cs" />
@@ -327,6 +329,7 @@
     <Compile Include="ViewModel\Admin\SidebarViewModel.cs" />
     <Compile Include="ViewModel\Admin\WidgetViewModel.cs" />
     <Compile Include="ViewModel\Front\CategoriesWidgetViewModel.cs" />
+    <Compile Include="ViewModel\Front\CommentViewModel.cs" />
     <Compile Include="ViewModel\Front\NavPageViewModel.cs" />
     <Compile Include="ViewModel\Front\PageViewModel.cs" />
     <Compile Include="ViewModel\Front\SearchWidgetViewModel.cs" />
@@ -1102,6 +1105,7 @@
     <Folder Include="fileman\Uploads\Documents\" />
     <Folder Include="fileman\Uploads\FLV\" />
     <Folder Include="Migrations\Models\" />
+    <Folder Include="Views\Comments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
