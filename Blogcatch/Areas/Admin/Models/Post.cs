@@ -42,8 +42,9 @@ namespace Blogcatch.Areas.Admin.Models
 
         public bool AllowComments { get; set; }
 
-        public ICollection<PostTag> PostTags { get; set; }
+        public ICollection<PostTag> PostTags { get; set; } = new Collection<PostTag>();
 
+        public ICollection<Comment> Comments { get; set; } = new Collection<Comment>();
 
         public Category Category { get; set; }
 
@@ -63,7 +64,6 @@ namespace Blogcatch.Areas.Admin.Models
             {
                 throw new ArgumentNullException(nameof(userId));
             }
-            PostTags = new Collection<PostTag>();
             this.AuthorId = userId;
             this.PostDate = DateTime.Now;
             this.AllowComments = postVM.AllowComments;
@@ -76,7 +76,7 @@ namespace Blogcatch.Areas.Admin.Models
 
         public Post()
         {
-            PostTags = new Collection<PostTag>();
+
         }
 
 

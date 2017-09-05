@@ -16,6 +16,8 @@ namespace Blogcatch.ViewModel.Front
 
         public string HeaderPicture { get; set; }
 
+        public Sidebar Sidebar { get; set; }
+
         public PageViewModel(Page page)
         {
             this.Title = page.Title;

@@ -26,5 +26,13 @@
                 @Html.Raw(Model.Body)
             </article>
         </div>
+        @if (Model.HasSidebar)
+        {
+            <div class="col-lg-4 col-md-4">
+                <article class="the-sidebar">
+                    @Html.Raw(Model.Sidebar.Body)
+                </article>
+            </div>
+        }
     </div>
 </div>

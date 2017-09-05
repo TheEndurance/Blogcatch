@@ -223,6 +223,7 @@
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\WidgetsController.cs" />
     <Compile Include="Areas\Admin\Models\Category.cs" />
+    <Compile Include="Areas\Admin\Models\Comment.cs" />
     <Compile Include="Areas\Admin\Models\dto\CategoryDto.cs" />
     <Compile Include="Areas\Admin\Models\dto\PageDto.cs" />
     <Compile Include="Areas\Admin\Models\Page.cs" />
@@ -304,6 +305,10 @@
     <Compile Include="Migrations\201709042141208_PageHeaderPicture.cs" />
     <Compile Include="Migrations\201709042141208_PageHeaderPicture.Designer.cs">
       <DependentUpon>201709042141208_PageHeaderPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709050202203_PostComment.cs" />
+    <Compile Include="Migrations\201709050202203_PostComment.Designer.cs">
+      <DependentUpon>201709050202203_PostComment.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1157,6 +1162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709042141208_PageHeaderPicture.resx">
       <DependentUpon>201709042141208_PageHeaderPicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709050202203_PostComment.resx">
+      <DependentUpon>201709050202203_PostComment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

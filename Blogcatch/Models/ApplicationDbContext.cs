@@ -15,6 +15,7 @@ namespace Blogcatch.Models
 
         public DbSet<PostTag> PostTags { get; set; }
         public DbSet<Widget> Widgets { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
 
         public ApplicationDbContext()
@@ -22,9 +23,18 @@ namespace Blogcatch.Models
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //configure domain classes
+            modelBuilder.Entity<Comment>().HasRequired(x=>x.Post).WithMany(x=>x.Comments).WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
     }
 }
