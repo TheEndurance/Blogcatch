@@ -16,8 +16,6 @@ namespace Blogcatch.ViewModel.Front
 
         public ApplicationUser Author { get; set; }
 
-        public string AuthorId { get; set; }
-
         public DateTime PostedDate { get; set; }
         
         [Required]
@@ -25,7 +23,6 @@ namespace Blogcatch.ViewModel.Front
 
         public int PostId { get; set; }
 
-        public int? ParentCommentId { get; set; }
 
         //fill this collection by doing looking for comments whoses ParentCommentId is the same as this comments Id
 
@@ -33,6 +30,11 @@ namespace Blogcatch.ViewModel.Front
 
         public CommentViewModel(Comment comment)
         {
+            this.Id = comment.Id;
+            this.Author = comment.Author;
+            this.PostedDate = comment.PostedDate;
+            this.Body = comment.Body;
+            this.PostId = comment.PostId;
         }
     }
 }

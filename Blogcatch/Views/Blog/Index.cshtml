@@ -5,7 +5,7 @@
 }
 
 @{
-    Html.RenderAction("Navbar","Navbar", new {area = ""});
+    Html.RenderAction("Navbar", "Navbar", new { area = "" });
 }
 
 <!-- Page Header -->
@@ -25,7 +25,7 @@
 </header>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 post-area">
+        <div class="col-md-8 col-lg-8 post-area">
             <!-- Main page heading -->
             <h1 class="page-header">
                 Blogcatch
@@ -35,7 +35,7 @@
             {
                 <!-- Blog post -->
                 <h2>
-                    @Html.ActionLink(post.Title.ToString(),"Post","Blog",new {title=post.Slug},null)
+                    @Html.ActionLink(post.Title.ToString(), "Post", "Blog", new { title = post.Slug }, null)
                 </h2>
                 <p class="lead">@post.Author.UserName</p>
                 <p><i class="fa fa-clock-o fa-1" aria-hidden="true"></i> Posted on @post.PostDate</p>
@@ -50,9 +50,9 @@
                 }
                 <hr>
                 <p>@Html.Raw(post.Excerpt)</p>
-                <a class="btn btn-primary" href="/Blog/Post?title=@post.Slug">Read More <i class="fa fa-chevron-right fa-1" aria-hidden="true"></i></a><br/><br/>
+                <a class="btn btn-primary" href="/Blog/Post?title=@post.Slug">Read More <i class="fa fa-chevron-right fa-1" aria-hidden="true"></i></a><br /><br />
 
-                <span>Category: @post.Category.Name</span><br/>
+                <span>Category: @post.Category.Name</span><br />
                 <span>Tags: </span>
                 foreach (var tag in post.PostTags.Select(x => x.Tag.Name))
                 {
@@ -61,51 +61,51 @@
 
                 <hr>
             }
-
             <!-- pager -->
-            @if (Model.Pager.EndPage > 1)
+            <div class="row">
+                @if (Model.Pager.EndPage > 1)
             {
-                <ul class="pagination pagination-lg">
-                    @if (Model.Pager.CurrentPage > 1)
-                    {
-                        <li>
-                            @Html.ActionLink("First","Index","Blog",new {page = 1,search = Model.Search, category = Model.Category},null)
-                        </li>
-                        <li>
-                            @Html.ActionLink("Previous","Index","Blog",new { page = Model.Pager.CurrentPage - 1, search=Model.Search, category = Model.Category},null)
-                        </li>
-                    }
+                    <ul class="pagination pagination-lg">
+                        @if (Model.Pager.CurrentPage > 1)
+                        {
+                            <li>
+                                @Html.ActionLink("First", "Index", "Blog", new { page = 1, search = Model.Search, category = Model.Category }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Previous", "Index", "Blog", new { page = Model.Pager.CurrentPage - 1, search = Model.Search, category = Model.Category }, null)
+                            </li>
+                        }
 
-                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-                    {
-                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                            @Html.ActionLink(page.ToString(), "Index", "Blog", new { page = page, search = Model.Search, category = Model.Category },null)
-                        </li>
-                    }
+                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                        {
+                            <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                                @Html.ActionLink(page.ToString(), "Index", "Blog", new { page = page, search = Model.Search, category = Model.Category }, null)
+                            </li>
+                        }
 
-                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-                    {
-                        <li>
-                            @Html.ActionLink("Next", "Index", "Blog",new {page = Model.Pager.CurrentPage+1, search = Model.Search },null)
-                        </li>
-                        <li>
-                            @Html.ActionLink("Last", "Index", "Blog", new {page = Model.Pager.EndPage, search = Model.Search , category = Model.Category },null)
-                            
-                        </li>
-                    }
-                </ul>
-            }
+                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                        {
+                            <li>
+                                @Html.ActionLink("Next", "Index", "Blog", new { page = Model.Pager.CurrentPage + 1, search = Model.Search }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Last", "Index", "Blog", new { page = Model.Pager.EndPage, search = Model.Search, category = Model.Category }, null)
 
-        </div>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div> <!-- end of pager row-->
+        </div> <!-- end of post column-->
         <div class="col-md-4 widget-area">
             @foreach (var widget in Model.ActiveWidgets)
             {
                 <div class="well">
                     @{
-                        Html.RenderAction(widget, "Widgets", new {area = ""});
+                        Html.RenderAction(widget, "Widgets", new { area = "" });
                     }
                 </div>
-             }
+                        }
         </div>
     </div>
 </div>

@@ -25,7 +25,7 @@
             <article class="the-post">
                 @Html.Raw(Model.Content)
             </article>
-            <hr/>
+            <hr />
             <section class="the-comments">
                 @if (Model.AllowComments)
                 {
@@ -38,4 +38,80 @@
             </section>
         </div>
     </div>
+    <hr />
+    @if (Model.AllowComments)
+    {
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Leave a comment box -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Leave a comment</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="" method="POST" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <textarea name="" id="" class="form-control" rows="3" required="required"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Comment box-->
+                <div class="comment-area">
+                    @foreach (var comment in Model.CommentViewModels)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">@comment.Author.Email <small>Posted on @comment.PostedDate </small></h4>
+                                        <hr>
+                                        <p>@comment.Body</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <a href="#">Reply</a>
+                            </div>
+                        </div>
+                        if (comment.ChildrenCommentCount > 0)
+                        {
+                            <div class="nested-comments">
+                                <a href="#">View all @comment.ChildrenCommentCount replies</a>
+                                <div class="row">
+                                    <div class="col-md-11 col-md-offset-1">
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="nested-comments">
+                        <div class="row">
+                            <div class="col-md-11 col-md-offset-1">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- End of nested-comments class -->
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>Comments have been disabled on this post.</p>
+            </div>
+        </div>
+    }
 </div>

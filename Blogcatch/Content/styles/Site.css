@@ -65,8 +65,16 @@ table.sorting tr:not(.home) {
 .connectWidgets > li {
     cursor: pointer;
 }
+/************/
+/* FRONT */
+/************/
 
-/* Blog front-end main page */
+/* Blog main index page */
 .category-content {
     padding: 1rem;
+}
+
+/* Blog post page */
+.nested-comments {
+    margin-top: -2rem;
 }

@@ -79,13 +79,14 @@ namespace Blogcatch.Controllers
             if (post.AllowComments)
             {
                 var commentVM = _context.Comments
-                    .Where(x => x.PostId == post.Id)
+                    .Where(x => x.PostId == post.Id && x.ParentCommentId==null)
+                    .Include(x=>x.Author)
                     .ToArray()
                     .Select(x => new CommentViewModel(x))
                     .ToList();
 
                 //get the counts of children comments into a dictionary with the key as a Parent comment Id, and the value as the count of children comments for that parent comment
-                var _counts = _context.Comments.GroupBy(x => x.ParentCommentId)
+                var _counts = _context.Comments.Where(x=>x.ParentCommentId!=null).GroupBy(x => x.ParentCommentId)
                     .ToDictionary(d => d.Key, d => d.Count());
 
                 //assigning the counts of children comments to each comment
