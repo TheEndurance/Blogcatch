@@ -109,24 +109,30 @@
     <script>
         $(document).ready(function() {
 
+            var ajaxImg = $("<img />").attr('src', '~/Content/images/ajax-loader.gif');
+            var ajaxImgSpan = $("<span />").addClass("ajax-image").html(ajaxImg);
             /*
             * View replies for comments, on click event: AJAX get request to return child comments
             */
-            $(".comments-area .nested-comment-container").on("click",
-                ".js-view-replies",
+            $(".nested-comment-container").on("click",
+                ".js-view-replies:not(.ajax-opened)",
                 function () {
-                    var nestedCommentDiv = $(this);
-                    var parentCommentId = $(this).attr('data-parent-comment-id');
+                    var replyLink = $(this);
+                    var parentCommentId = replyLink.attr('data-parent-comment-id');
+                    var nestedComments = $(".nested-comments#" + parentCommentId).html(ajaxImgSpan);
                     $.ajax({
-                        Url: "/Comments/GetChildrenComments/"+parentCommentId,
-                        method: "GET",
-                        success: function(childComments) {
-                            $(nestedCommentDiv).html(childComments);
+                        url: "/Comments/GetChildrenComments/" + parentCommentId,
+                        type: "GET",
+                        success: function (childComments) {
+                            nestedComments.html(childComments);
+                            replyLink.addClass("ajax-opened");
+                            replyLink.html("Hide replies");
                         },
-                        error: function() {
+                        error: function () {
                             alert("Can not get replies");
                         }
                     });
+
                 });
             ////////////////////////////////////////////////////////////////////////////////////////
         });

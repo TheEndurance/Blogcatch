@@ -30,6 +30,7 @@ namespace Blogcatch.Controllers
         }
 
         // GET : /Comments/GetChildrenComments/id
+        [HttpGet]
         public ActionResult GetChildrenComments(int id)
         {
             var commentVM = _context.Comments
