@@ -103,6 +103,7 @@
                 <p>Comments have been disabled on this post.</p>
             </div>
         </div>
+        
     }
 </div>
 @section scripts{
@@ -111,30 +112,63 @@
 
             var ajaxImg = $("<img />").attr('src', '~/Content/images/ajax-loader.gif');
             var ajaxImgSpan = $("<span />").addClass("ajax-image").html(ajaxImg);
+
+            /*
+            * View reply button sub routine
+            */
+            function ButtonToHideReplies(replyLink) {
+                replyLink.html("Hide replies");
+                replyLink.attr('replies-hidden', 'false');
+            }
+            function ButtonToShowReplies(replyLink) {
+                replyLink.html("Show replies");
+                replyLink.attr('replies-hidden', 'true');
+            }
+            //////////////////////////////////////////////////////////////////////////////////////
+
             /*
             * View replies for comments, on click event: AJAX get request to return child comments
             */
             $(".nested-comment-container").on("click",
                 ".js-view-replies:not(.ajax-opened)",
-                function () {
+                function() {
                     var replyLink = $(this);
                     var parentCommentId = replyLink.attr('data-parent-comment-id');
                     var nestedComments = $(".nested-comments#" + parentCommentId).html(ajaxImgSpan);
                     $.ajax({
                         url: "/Comments/GetChildrenComments/" + parentCommentId,
                         type: "GET",
-                        success: function (childComments) {
+                        success: function(childComments) {
                             nestedComments.html(childComments);
                             replyLink.addClass("ajax-opened");
-                            replyLink.html("Hide replies");
+                            ButtonToHideReplies(replyLink);
                         },
-                        error: function () {
+                        error: function() {
                             alert("Can not get replies");
                         }
                     });
 
                 });
             ////////////////////////////////////////////////////////////////////////////////////////
+
+            /*
+            * Hide and show replies after it has been retrieved using ajax
+            */
+            $(".nested-comment-container").on("click",
+                ".js-view-replies.ajax-opened",
+                function() {
+                    var replyLink = $(this);
+                    var parentCommentId = replyLink.attr('data-parent-comment-id');
+                    var nestedComments = $(".nested-comments#" + parentCommentId);
+                    if (replyLink.attr('replies-hidden') === 'false') {
+                        nestedComments.fadeOut();
+                        ButtonToShowReplies(replyLink);
+                    } else if (replyLink.attr('replies-hidden') === 'true') {
+                        nestedComments.fadeIn();
+                        ButtonToHideReplies(replyLink);
+                    }
+
+                });
         });
     </script>
 }
