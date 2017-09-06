@@ -85,9 +85,10 @@ namespace Blogcatch.Controllers
                     .Select(x => new CommentViewModel(x))
                     .ToList();
 
-                //get the counts of children comments into a dictionary with the key as a Parent comment Id, and the value as the count of children comments for that parent comment
+                //get the counts of children comments into a dictionary with the key as a Parent comment Id, and the value as the count of comments with that parent comment Id
                 var _counts = _context.Comments.Where(x=>x.ParentCommentId!=null).GroupBy(x => x.ParentCommentId)
                     .ToDictionary(d => d.Key, d => d.Count());
+                
 
                 //assigning the counts of children comments to each comment
                 foreach (var c in commentVM)

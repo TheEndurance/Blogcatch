@@ -84,24 +84,14 @@
                         </div>
                         if (comment.ChildrenCommentCount > 0)
                         {
-                            <div class="nested-comments">
-                                <a href="#">View all @comment.ChildrenCommentCount replies</a>
-                                <div class="row">
-                                    <div class="col-md-11 col-md-offset-1">
+                            <div class="nested-comment-container">
+                                <a class="btn btn-link js-view-replies" data-parent-comment-id="@comment.Id">View all @comment.ChildrenCommentCount replies</a>
+                                <div class="nested-comments" id="@comment.Id">
 
-                                    </div>
                                 </div>
                             </div>
                         }
                     }
-                    <div class="nested-comments">
-                        <div class="row">
-                            <div class="col-md-11 col-md-offset-1">
-
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div><!-- End of nested-comments class -->
         </div>
@@ -115,3 +105,30 @@
         </div>
     }
 </div>
+@section scripts{
+    <script>
+        $(document).ready(function() {
+
+            /*
+            * View replies for comments, on click event: AJAX get request to return child comments
+            */
+            $(".comments-area .nested-comment-container").on("click",
+                ".js-view-replies",
+                function () {
+                    var nestedCommentDiv = $(this);
+                    var parentCommentId = $(this).attr('data-parent-comment-id');
+                    $.ajax({
+                        Url: "/Comments/GetChildrenComments/"+parentCommentId,
+                        method: "GET",
+                        success: function(childComments) {
+                            $(nestedCommentDiv).html(childComments);
+                        },
+                        error: function() {
+                            alert("Can not get replies");
+                        }
+                    });
+                });
+            ////////////////////////////////////////////////////////////////////////////////////////
+        });
+    </script>
+}

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Blogcatch.ViewModel.Front.CommentViewModel>
+
+<div class="row">
+    <div class="col-md-11 col-md-offset-1">
+        @foreach (var comment in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-body">
+                            <h4 class="media-heading">@comment.Author.Email <small>Posted on @comment.PostedDate </small></h4>
+                            <hr>
+                            <p>@comment.Body</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a href="#">Reply</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

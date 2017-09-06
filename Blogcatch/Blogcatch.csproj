@@ -1096,6 +1096,7 @@
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Navbar\_Navbar.cshtml" />
     <Content Include="Views\Blog\Page.cshtml" />
+    <Content Include="Views\Comments\_ChildComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
@@ -1105,7 +1106,6 @@
     <Folder Include="fileman\Uploads\Documents\" />
     <Folder Include="fileman\Uploads\FLV\" />
     <Folder Include="Migrations\Models\" />
-    <Folder Include="Views\Comments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

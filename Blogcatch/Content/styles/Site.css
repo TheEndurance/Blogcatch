@@ -75,6 +75,6 @@ table.sorting tr:not(.home) {
 }
 
 /* Blog post page */
-.nested-comments {
+.nested-comment-container {
     margin-top: -2rem;
 }
