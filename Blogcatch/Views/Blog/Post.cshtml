@@ -49,18 +49,21 @@
                         <h3 class="panel-title">Leave a comment</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="" method="POST" class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <textarea name="" id="" class="form-control" rows="3" required="required"></textarea>
+                        <div id="comment-reply">
+                            <form action="" method="POST" class="form-horizontal" role="form">
+                                <input type="hidden" name="PostId" id="PostId" value="@Model.Id"/>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <textarea name="" id="" class="form-control" rows="3" required="required"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
@@ -79,7 +82,11 @@
                                 </div>
                             </div>
                             <div class="panel-footer">
-                                <a href="#">Reply</a>
+                                <a class="btn btn-link js-comment-reply" data-comment-id="@comment.Id">Reply</a>
+                                <!-- Quick reply form gets inserted here-->
+                                <div class="quick-reply" id="@comment.Id">
+                                    
+                                </div>
                             </div>
                         </div>
                         if (comment.ChildrenCommentCount > 0)
@@ -110,8 +117,9 @@
     <script>
         $(document).ready(function() {
 
-            var ajaxImg = $("<img />").attr('src', '~/Content/images/ajax-loader.gif');
+            var ajaxImg = $("<img>").attr('src', '/Content/images/big-ajax-loader.gif');
             var ajaxImgSpan = $("<span />").addClass("ajax-image").html(ajaxImg);
+            var commentForm = $("#comment-reply").clone();
 
             /*
             * View reply button sub routine
@@ -168,6 +176,17 @@
                         ButtonToHideReplies(replyLink);
                     }
 
+                });
+            //////////////////////////////////////////////////////////////////////////////////////
+
+            /*
+            * Insert quick-reply form on a comment
+            */
+            $(".comment-area").on("click",
+                ".js-comment-reply",
+                function() {
+                    var commentId = $(this).attr('data-comment-id');
+                    $(".comment-area .quick-reply#" + commentId).html(commentForm);
                 });
         });
     </script>

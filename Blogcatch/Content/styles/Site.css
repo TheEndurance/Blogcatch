@@ -78,3 +78,8 @@ table.sorting tr:not(.home) {
 .nested-comment-container {
     margin-top: -2rem;
 }
+
+/*Blog post page Quick reply form*/
+.quick-reply {
+    padding: 0rem 2rem;
+}

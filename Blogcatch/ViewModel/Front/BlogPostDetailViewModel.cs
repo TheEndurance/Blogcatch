@@ -7,7 +7,7 @@ namespace Blogcatch.ViewModel.Front
 {
     public class BlogPostDetailViewModel
     {
-
+        public int Id { get; set; }
         public ApplicationUser Author { get; set; }
 
         public DateTime PostDate { get; set; }
@@ -24,6 +24,7 @@ namespace Blogcatch.ViewModel.Front
 
         public BlogPostDetailViewModel(Post post)
         {
+            this.Id = post.Id;
             this.Author = post.Author;
             this.PostDate = post.PostDate;
             this.Content = post.Content;

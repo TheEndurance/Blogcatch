@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Blogcatch.Models;
@@ -40,6 +41,7 @@ namespace Blogcatch.Controllers
                 .Select(x => new CommentViewModel(x))
                 .ToList();
 
+            Thread.Sleep(2000);
             return PartialView("_ChildComments", commentVM);
         }
     }
