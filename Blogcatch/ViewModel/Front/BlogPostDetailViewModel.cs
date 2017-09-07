@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Blogcatch.Areas.Admin.Models;
+﻿using Blogcatch.Areas.Admin.Models;
 using Blogcatch.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Blogcatch.ViewModel.Front
 {
@@ -15,8 +15,10 @@ namespace Blogcatch.ViewModel.Front
         public string Content { get; set; }
 
         public string DisplayPicture { get; set; }
-        
+
         public string Title { get; set; }
+
+        public string Slug { get; set; }
 
         public bool AllowComments { get; set; }
 
@@ -29,6 +31,7 @@ namespace Blogcatch.ViewModel.Front
             this.PostDate = post.PostDate;
             this.Content = post.Content;
             this.Title = post.Title;
+            this.Slug = post.Slug;
             this.AllowComments = post.AllowComments;
         }
 

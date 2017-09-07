@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace Blogcatch.Models.Dto
 {
     public class CommentDto
     {
-        public int Id { get; set; }
+        [Required]
+        public int CommentId { get; set; }
 
         public ApplicationUser Author { get; set; }
 
@@ -15,10 +14,10 @@ namespace Blogcatch.Models.Dto
 
         public DateTime PostedDate { get; set; }
 
+        [Required]
         public string Body { get; set; }
 
-        public int PostId { get; set; }
 
-        public int? ParentCommentId { get; set; }
+        public string PostSlug { get; set; }
     }
 }

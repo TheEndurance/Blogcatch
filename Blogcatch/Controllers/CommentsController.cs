@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Blogcatch.Models;
+using Blogcatch.Models.Dto;
+using Blogcatch.ViewModel.Front;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
-using System.Web;
 using System.Web.Mvc;
-using Blogcatch.Models;
-using Blogcatch.ViewModel.Front;
 
 namespace Blogcatch.Controllers
 {
@@ -25,8 +24,17 @@ namespace Blogcatch.Controllers
         }
 
         // POST: /Comments/AddComment
-        public ActionResult AddComment()
+        [HttpPost]
+        public ActionResult AddComment(CommentDto commentDto)
         {
+            var userId = User.Identity.GetUserId();
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Post", "Blog", new { title = commentDto.PostSlug });
+            }
+
+
+
             return View();
         }
 
@@ -36,12 +44,12 @@ namespace Blogcatch.Controllers
         {
             var commentVM = _context.Comments
                 .Where(x => x.ParentCommentId == id)
-                .Include(x=>x.Author)
+                .Include(x => x.Author)
                 .ToArray()
                 .Select(x => new CommentViewModel(x))
                 .ToList();
 
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             return PartialView("_ChildComments", commentVM);
         }
     }

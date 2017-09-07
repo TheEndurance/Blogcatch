@@ -50,11 +50,11 @@
                     </div>
                     <div class="panel-body">
                         <div id="comment-reply">
-                            <form action="" method="POST" class="form-horizontal" role="form">
-                                <input type="hidden" name="PostId" id="PostId" value="@Model.Id"/>
+                            <form action="/Comments/AddComment" method="POST" class="form-horizontal" role="form">
+                                <input type="hidden" name="PostSlug" id="PostSlug" value="@Model.Slug"/>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <textarea name="" id="" class="form-control" rows="3" required="required"></textarea>
+                                        <textarea name="Body" id="Body" class="form-control" rows="3" required="required"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -84,7 +84,7 @@
                             <div class="panel-footer">
                                 <a class="btn btn-link js-comment-reply" data-comment-id="@comment.Id">Reply</a>
                                 <!-- Quick reply form gets inserted here-->
-                                <div class="quick-reply" id="@comment.Id">
+                                <div class="quick-reply" data-comment-id="@comment.Id">
                                     
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                         {
                             <div class="nested-comment-container">
                                 <a class="btn btn-link js-view-replies" data-parent-comment-id="@comment.Id">View all @comment.ChildrenCommentCount replies</a>
-                                <div class="nested-comments" id="@comment.Id">
+                                <div class="nested-comments" data-parent-comment-id="@comment.Id">
 
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                 function() {
                     var replyLink = $(this);
                     var parentCommentId = replyLink.attr('data-parent-comment-id');
-                    var nestedComments = $(".nested-comments#" + parentCommentId).html(ajaxImgSpan);
+                    var nestedComments = $(".nested-comments[data-parent-comment-id=" + parentCommentId+"]").html(ajaxImgSpan);
                     $.ajax({
                         url: "/Comments/GetChildrenComments/" + parentCommentId,
                         type: "GET",
@@ -167,7 +167,7 @@
                 function() {
                     var replyLink = $(this);
                     var parentCommentId = replyLink.attr('data-parent-comment-id');
-                    var nestedComments = $(".nested-comments#" + parentCommentId);
+                    var nestedComments = $(".nested-comments[data-parent-comment-id=" + parentCommentId+"]");
                     if (replyLink.attr('replies-hidden') === 'false') {
                         nestedComments.fadeOut();
                         ButtonToShowReplies(replyLink);
@@ -186,7 +186,15 @@
                 ".js-comment-reply",
                 function() {
                     var commentId = $(this).attr('data-comment-id');
-                    $(".comment-area .quick-reply#" + commentId).html(commentForm);
+                    if ($(commentForm).find("input[name=CommentId]").length === 0) {
+                        var hiddenInput = $("<input />").attr('type', 'hidden').attr('name', 'CommentId')
+                            .val(commentId);
+                        $(commentForm).append(hiddenInput);
+                    } else {
+                        $(commentForm).find("input[name=CommentId]").eq(0).val(commentId);
+                    }
+                    
+                    $(".comment-area .quick-reply[data-comment-id=" + commentId+"]").html(commentForm);
                 });
         });
     </script>
