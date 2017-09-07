@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Blogcatch.Models;
+using Blogcatch.ViewModel.Front;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using Blogcatch.Models;
-using Blogcatch.ViewModel;
-using Blogcatch.ViewModel.Front;
 
 namespace Blogcatch.Controllers
 {
@@ -79,16 +77,17 @@ namespace Blogcatch.Controllers
             if (post.AllowComments)
             {
                 var commentVM = _context.Comments
-                    .Where(x => x.PostId == post.Id && x.ParentCommentId==null)
-                    .Include(x=>x.Author)
+                    .Where(x => x.PostId == post.Id && x.ParentCommentId == null)
+                    .Include(x => x.Author)
+                    .OrderByDescending(x => x.PostedDate)
                     .ToArray()
                     .Select(x => new CommentViewModel(x))
                     .ToList();
 
                 //get the counts of children comments into a dictionary with the key as a Parent comment Id, and the value as the count of comments with that parent comment Id
-                var _counts = _context.Comments.Where(x=>x.ParentCommentId!=null).GroupBy(x => x.ParentCommentId)
+                var _counts = _context.Comments.Where(x => x.ParentCommentId != null).GroupBy(x => x.ParentCommentId)
                     .ToDictionary(d => d.Key, d => d.Count());
-                
+
 
                 //assigning the counts of children comments to each comment
                 foreach (var c in commentVM)
@@ -98,10 +97,10 @@ namespace Blogcatch.Controllers
 
                 blogPostDetailVM.CommentViewModels = commentVM;
             }
-            
+
             return View(blogPostDetailVM);
         }
-        
+
         //GET : /blog/Page?title=
         public ActionResult Page(string title)
         {

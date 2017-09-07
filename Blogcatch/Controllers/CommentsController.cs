@@ -1,7 +1,9 @@
-﻿using Blogcatch.Models;
+﻿using Blogcatch.Areas.Admin.Models;
+using Blogcatch.Models;
 using Blogcatch.Models.Dto;
 using Blogcatch.ViewModel.Front;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -33,9 +35,46 @@ namespace Blogcatch.Controllers
                 return RedirectToAction("Post", "Blog", new { title = commentDto.PostSlug });
             }
 
+            //Create the new comment
+            var newComment = new Comment
+            {
+                AuthorId = userId,
+                Body = commentDto.Body,
+                PostedDate = DateTime.Now
+            };
 
 
-            return View();
+            if (commentDto.CommentId == null) //This is a comment for the post
+            {
+                var post = _context.Posts.Find(commentDto.PostId);
+                post.Comments.Add(newComment);
+            }
+            else //This is a reply to another comment
+            {
+                //The comment being replied to
+                var commentBeingRepliedTo = _context.Comments.Find(commentDto.CommentId);
+
+                if (commentBeingRepliedTo.ParentCommentId == null) // this comment isn't nested
+                {
+                    //add the comment to the post
+                    var post = _context.Posts.Find(commentDto.PostId);
+                    newComment.ParentCommentId = commentBeingRepliedTo.Id;
+                    post.Comments.Add(newComment);
+                }
+                else //this comment is nested
+                {
+                    //find the parent comment, and add the new comment to it
+                    var parentComment = _context.Comments.Find(commentBeingRepliedTo.ParentCommentId);
+
+                    newComment.ParentCommentId = parentComment.Id;
+                    newComment.PostId = commentDto.PostId;
+
+                    parentComment.Comments.Add(newComment);
+                }
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("Post", "Blog", new { title = commentDto.PostSlug });
         }
 
         // GET : /Comments/GetChildrenComments/id
@@ -45,6 +84,7 @@ namespace Blogcatch.Controllers
             var commentVM = _context.Comments
                 .Where(x => x.ParentCommentId == id)
                 .Include(x => x.Author)
+                .OrderByDescending(x => x.PostedDate)
                 .ToArray()
                 .Select(x => new CommentViewModel(x))
                 .ToList();

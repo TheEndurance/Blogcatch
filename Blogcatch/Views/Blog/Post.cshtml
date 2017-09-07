@@ -51,7 +51,8 @@
                     <div class="panel-body">
                         <div id="comment-reply">
                             <form action="/Comments/AddComment" method="POST" class="form-horizontal" role="form">
-                                <input type="hidden" name="PostSlug" id="PostSlug" value="@Model.Slug"/>
+                                <input type="hidden" name="PostId" value="@Model.Id" />
+                                <input type="hidden" name="PostSlug" value="@Model.Slug"/>
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <textarea name="Body" id="Body" class="form-control" rows="3" required="required"></textarea>
@@ -119,7 +120,7 @@
 
             var ajaxImg = $("<img>").attr('src', '/Content/images/big-ajax-loader.gif');
             var ajaxImgSpan = $("<span />").addClass("ajax-image").html(ajaxImg);
-            var commentForm = $("#comment-reply").clone();
+            var commentForm = $("#comment-reply").attr("id","quick-comment-reply").clone();
 
             /*
             * View reply button sub routine
@@ -189,7 +190,7 @@
                     if ($(commentForm).find("input[name=CommentId]").length === 0) {
                         var hiddenInput = $("<input />").attr('type', 'hidden').attr('name', 'CommentId')
                             .val(commentId);
-                        $(commentForm).append(hiddenInput);
+                        $(commentForm).find("form").eq(0).prepend(hiddenInput);
                     } else {
                         $(commentForm).find("input[name=CommentId]").eq(0).val(commentId);
                     }
