@@ -44,7 +44,7 @@ namespace Blogcatch.Controllers
             var pager = new Pager(blogPostVM.Count(), page, 2);
 
             //get the active widget names
-            var activeWidgets = _context.Widgets.Where(x => x.Enabled).Select(x => x.Type).ToList();
+            var activeWidgets = _context.Widgets.Where(x => x.Enabled).OrderBy(x => x.Sorting).Select(x => x.Type).ToList();
 
             //create the main viewmodel
             var blogVM = new BlogViewModel
