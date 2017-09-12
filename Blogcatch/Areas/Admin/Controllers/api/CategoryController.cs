@@ -2,10 +2,10 @@
 using Blogcatch.Areas.Admin.Models;
 using Blogcatch.Areas.Admin.Models.dto;
 using Blogcatch.AutoMapper;
+using Blogcatch.Models;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Routing;
-using Blogcatch.Models;
 
 namespace Blogcatch.Areas.Admin.Controllers.api
 {
@@ -73,11 +73,14 @@ namespace Blogcatch.Areas.Admin.Controllers.api
         [HttpDelete]
         public IHttpActionResult DeleteCategory([FromUri] int id)
         {
+            if (id == 1)
+                return BadRequest();
+
             var category = _context.Categories.Find(id);
+
             if (category == null)
-            {
                 return NotFound();
-            }
+
             _context.Categories.Remove(category);
             _context.SaveChanges();
             return Ok(id);

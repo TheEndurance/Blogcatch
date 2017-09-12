@@ -1,9 +1,8 @@
 ﻿using Blogcatch.Areas.Admin.Models;
-using Blogcatch.ViewModel;
-using System.Linq;
-using System.Web.Mvc;
 using Blogcatch.Models;
 using Blogcatch.ViewModel.Admin;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Blogcatch.Areas.Admin.Controllers
 {
@@ -45,6 +44,12 @@ namespace Blogcatch.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                return View("PageForm", pageVM);
+            }
+
+            if (pageVM.Title.Trim().ToLower() == "home")
+            {
+                ModelState.AddModelError("", "Can not create a page with the name 'Home'");
                 return View("PageForm", pageVM);
             }
 
